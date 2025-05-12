@@ -2,7 +2,9 @@ package com.example.agrodirect.models.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,8 +31,12 @@ public class User extends BaseEntity {
     )
     private Set<Role> roles;
 
+    @OneToMany(mappedBy = "farmer")
+    private List<Product> products;
+
     public User() {
         this.roles = new HashSet<>();
+        this.products = new ArrayList<>();
     }
 
 
@@ -76,5 +82,13 @@ public class User extends BaseEntity {
 
         this.roles = roles;
         return this;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

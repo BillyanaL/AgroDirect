@@ -5,7 +5,6 @@ import com.example.agrodirect.models.entities.User;
 import com.example.agrodirect.repositories.UserRepository;
 import com.example.agrodirect.services.AuthenticationService;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добави продукт</title>
+    <link rel="stylesheet" href="/css/add-product.css">
+</head>
+<body>
+<section class="add-product-section">
+    <div class="container">
+
+        <form th:action="@{/farmer/products/add}" th:object="${addProductDTO}" method="post" class="add-product-form">
+            <h2 class="section-title">Добави нов продукт</h2>
+            <div class="form-group">
+                <label for="name">Име:</label>
+                <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="'invalid-feedback rounded'"></small>
+                <input type="text" id="name" th:field="*{name}" placeholder="Пример: Домат" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Описание:</label>
+                <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:class="'invalid-feedback rounded'"></small>
+                <textarea id="description" th:field="*{description}" placeholder="Кратко описание на продукта..." required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Цена (лв):</label>
+                <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}" th:class="'invalid-feedback rounded'"></small>
+                <input type="number" step="0.01" id="price" th:field="*{price}" placeholder="Пример: 2.50" required>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Количество:</label>
+                <small th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" th:class="'invalid-feedback rounded'"></small>
+                <input type="number" id="quantity" th:field="*{quantity}" placeholder="Пример: 50" required>
+<!--                <small th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="error-message"></small>-->
+            </div>
+
+            <div class="form-group">
+                <label for="category">Категория:</label>
+                <small th:if="${#fields.hasErrors('category')}" th:errors="*{category}" th:class="'invalid-feedback rounded'"></small>
+                <select id="category" th:field="*{category}" required>
+                    <option value="" disabled>Избери категория</option>
+                    <option th:each="cat : ${T(com.example.agrodirect.models.enums.CategoryName).values()}"
+                            th:value="${cat}" th:text="${cat}">Категория</option>
+                </select>
+<!--                <small th:if="${#fields.hasErrors('category')}" th:errors="*{category}" class="error-message"></small>-->
+            </div>
+
+            <div class="form-group">
+                <label for="imageUrl">Линк към снимка:</label>
+                <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" th:class="'invalid-feedback rounded'"></small>
+                <input type="url" id="imageUrl" th:field="*{imageUrl}" placeholder="https://example.com/image.jpg" required>
+<!--                <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" class="error-message"></small>-->
+            </div>
+
+            <button type="submit" class="submit-btn">Добави продукт</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>
