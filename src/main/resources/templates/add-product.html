@@ -33,7 +33,6 @@
                 <label for="quantity">Количество:</label>
                 <small th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" th:class="'invalid-feedback rounded'"></small>
                 <input type="number" id="quantity" th:field="*{quantity}" placeholder="Пример: 50" required>
-<!--                <small th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="error-message"></small>-->
             </div>
 
             <div class="form-group">
@@ -44,14 +43,12 @@
                     <option th:each="cat : ${T(com.example.agrodirect.models.enums.CategoryName).values()}"
                             th:value="${cat}" th:text="${cat}">Категория</option>
                 </select>
-<!--                <small th:if="${#fields.hasErrors('category')}" th:errors="*{category}" class="error-message"></small>-->
             </div>
 
             <div class="form-group">
                 <label for="imageUrl">Линк към снимка:</label>
                 <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" th:class="'invalid-feedback rounded'"></small>
                 <input type="url" id="imageUrl" th:field="*{imageUrl}" placeholder="https://example.com/image.jpg" required>
-<!--                <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" class="error-message"></small>-->
             </div>
 
             <button type="submit" class="submit-btn">Добави продукт</button>

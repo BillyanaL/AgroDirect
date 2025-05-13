@@ -21,10 +21,6 @@ public class AddProductDTO {
 
     private CategoryName category;
     @NotBlank(message = "URL към изображението е задължителен.")
-//    @Pattern(
-//            regexp = "^(https?://).+\\.(jpg|jpeg|png|gif)$",
-//            message = "URL към изображението трябва да е валиден линк към изображение (jpg, jpeg, png, gif)."
-//    )
     private String imageUrl;
 
     private User author;

@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Моите продукти</title>
+    <link rel="stylesheet" href="/css/my-products.css">
+</head>
+<body>
+<section class="my-products-section">
+    <div class="container">
+        <h2 class="section-title">Моите продукти</h2>
+
+        <p class="success-message" th:if="${successMessage}" th:text="${successMessage}"></p>
+
+        <div class="product-grid" th:if="${products.size() > 0}">
+            <div class="product-card" th:each="product : ${products}">
+                <img class="product-image" th:src="${product.imageUrl}" alt="Product image">
+                <div class="product-info">
+                    <h3 th:text="${product.name}">Име</h3>
+                    <p><strong>Описание:</strong> <span th:text="${product.description}">Описание</span></p>
+                    <p><strong>Цена:</strong> <span th:text="${product.price}"></span> лв</p>
+                    <p><strong>Количество:</strong> <span th:text="${product.quantity}"></span></p>
+                    <p><strong>Категория:</strong> <span th:text="${product.category}"></span></p>
+                </div>
+                <div class="product-actions">
+                    <a th:href="@{/farmer/products/edit/{id}(id=${product.id})}" class="btn edit-btn">Редактирай</a>
+                    <a th:href="@{/farmer/products/delete/{id}(id=${product.id})}"
+                       class="btn delete-btn"
+                       onclick="return confirm('Сигурни ли сте, че искате да изтриете този продукт?');">
+                        Изтрий
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <p class="no-products" th:if="${products.size() == 0}">Все още нямате добавени продукти.</p>
+    </div>
+</section>
+</body>
+</html>
