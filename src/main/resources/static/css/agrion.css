@@ -4053,10 +4053,86 @@ ul {
   color: var(--agrion-white);
 }
 
+/*.project-one__single {*/
+/*  position: relative;*/
+/*  display: block;*/
+/*  margin-bottom: 30px;*/
+/*}*/
+
+/*.project-one__inner {*/
+/*  position: relative;*/
+/*  display: block;*/
+/*}*/
+
+/*.project-one__img {*/
+/*  position: relative;*/
+/*  display: block;*/
+/*  border-radius: var(--agrion-bdr-radius);*/
+/*  overflow: hidden;*/
+/*  z-index: 1;*/
+/*}*/
+
+/*.project-one__img:before {*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  right: 0;*/
+/*  bottom: 0;*/
+/*  content: "";*/
+/*  border-radius: 10px;*/
+/*  background: rgb(12, 26, 7);*/
+/*  background: linear-gradient(180deg, rgba(12, 26, 7, 0) 11%, rgba(12, 26, 7, 0.8547794117647058) 77%);*/
+/*  z-index: 1;*/
+/*}*/
+
+/*.project-one__img:after {*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  bottom: 0;*/
+/*  left: 0;*/
+/*  right: 0;*/
+/*  content: "";*/
+/*  background-color: rgba(var(--agrion-black-rgb), .30);*/
+/*  border-radius: var(--agrion-bdr-radius);*/
+/*  -webkit-transform: perspective(400px) rotateX(90deg) scaleY(0.5);*/
+/*  -ms-transform: perspective(400px) rotateX(90deg) scaleY(0.5);*/
+/*  transform: perspective(400px) rotateX(90deg) scaleY(0.5);*/
+/*  -webkit-transform-origin: center;*/
+/*  -ms-transform-origin: center;*/
+/*  transform-origin: center;*/
+/*  transition-delay: .1s;*/
+/*  transition-timing-function: ease-in-out;*/
+/*  transition-duration: .5s;*/
+/*  transition-property: all;*/
+/*}*/
+
+/*.project-one__single:hover .project-one__img:after {*/
+/*  -webkit-transform: perspective(400px) rotateX(0deg) scaleY(1.0);*/
+/*  -ms-transform: perspective(400px) rotateX(0deg) scaleY(1.0);*/
+/*  transform: perspective(400px) rotateX(0deg) scaleY(1.0);*/
+/*  transition-delay: .1s;*/
+/*  transition-timing-function: ease-in-out;*/
+/*  transition-duration: .7s;*/
+/*  transition-property: all;*/
+/*}*/
+
+/*.project-one__img img {*/
+/*  width: 100%;*/
+/*  border-radius: var(--agrion-bdr-radius);*/
+/*  -webkit-transform: scale(1);*/
+/*  transform: scale(1);*/
+/*  transition: all 500ms ease;*/
+/*}*/
+
+/*.project-one__single:hover .project-one__img img {*/
+/*  transform: scale(1.05);*/
+/*}*/
+
 .project-one__single {
   position: relative;
   display: block;
   margin-bottom: 30px;
+  width: 100%;  /* Увери се, че контейнерът е 100% широк */
 }
 
 .project-one__inner {
@@ -4067,9 +4143,25 @@ ul {
 .project-one__img {
   position: relative;
   display: block;
-  border-radius: var(--agrion-bdr-radius);
+  width: 100%;  /* За да запълни контейнера */
+  height: 500px;  /* Задай височината според нуждите */
   overflow: hidden;
   z-index: 1;
+  border-radius: var(--agrion-bdr-radius);
+}
+
+/* Задай object-fit за изображението */
+.project-one__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* Това ще накара изображението да запълни целия контейнер */
+  transition: all 500ms ease;
+}
+
+/* Задръж изображенията с малко zoom ефект при hover */
+.project-one__single:hover .project-one__img img {
+  transform: scale(1.05);
+  transition: all 500ms ease;
 }
 
 .project-one__img:before {
@@ -4094,39 +4186,15 @@ ul {
   content: "";
   background-color: rgba(var(--agrion-black-rgb), .30);
   border-radius: var(--agrion-bdr-radius);
-  -webkit-transform: perspective(400px) rotateX(90deg) scaleY(0.5);
-  -ms-transform: perspective(400px) rotateX(90deg) scaleY(0.5);
   transform: perspective(400px) rotateX(90deg) scaleY(0.5);
-  -webkit-transform-origin: center;
-  -ms-transform-origin: center;
-  transform-origin: center;
-  transition-delay: .1s;
-  transition-timing-function: ease-in-out;
-  transition-duration: .5s;
-  transition-property: all;
+  transition: all 0.7s ease-in-out;
 }
 
 .project-one__single:hover .project-one__img:after {
-  -webkit-transform: perspective(400px) rotateX(0deg) scaleY(1.0);
-  -ms-transform: perspective(400px) rotateX(0deg) scaleY(1.0);
   transform: perspective(400px) rotateX(0deg) scaleY(1.0);
-  transition-delay: .1s;
-  transition-timing-function: ease-in-out;
-  transition-duration: .7s;
-  transition-property: all;
 }
 
-.project-one__img img {
-  width: 100%;
-  border-radius: var(--agrion-bdr-radius);
-  -webkit-transform: scale(1);
-  transform: scale(1);
-  transition: all 500ms ease;
-}
-
-.project-one__single:hover .project-one__img img {
-  transform: scale(1.05);
-}
+/*до тук*/
 
 .project-one__arrow {
   position: absolute;
@@ -6223,7 +6291,9 @@ ul {
 .team-one__single {
   position: relative;
   display: block;
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
+  margin-bottom: 30px;
+  margin-right: 20px;
 }
 
 .team-one__img-box {
@@ -6238,9 +6308,48 @@ ul {
   box-shadow: 0px 10px 90px 0px rgba(0, 0, 0, 0.15);
 }
 
+/*.team-one__img {*/
+/*  position: relative;*/
+/*  display: block;*/
+/*  border-radius: 50%;*/
+/*  border-bottom-right-radius: 0;*/
+/*  overflow: hidden;*/
+/*  z-index: 1;*/
+/*}*/
+
+/*.team-one__img:before {*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  right: 0;*/
+/*  bottom: 0;*/
+/*  content: "";*/
+/*  background-color: rgba(var(--agrion-black-rgb), .30);*/
+/*  width: 0%;*/
+/*  transform: translateY(100%);*/
+/*  border-radius: 50%;*/
+/*  border-bottom-right-radius: 0;*/
+/*  transition: all 500ms ease;*/
+/*  z-index: 1;*/
+/*}*/
+
+/*.team-one__single:hover .team-one__img:before {*/
+/*  transform: translateY(0);*/
+/*  width: 100%;*/
+/*}*/
+
+/*.team-one__img img {*/
+/*  width: 100%;*/
+/*  border-radius: 50%;*/
+/*  border-bottom-right-radius: 0;*/
+/*  -webkit-transition: all 500ms ease;*/
+/*  transition: all 500ms ease;*/
+/*}*/
+
 .team-one__img {
   position: relative;
   display: block;
+  height: 360px;
   border-radius: 50%;
   border-bottom-right-radius: 0;
   overflow: hidden;
@@ -6269,12 +6378,17 @@ ul {
 }
 
 .team-one__img img {
-  width: 100%;
-  border-radius: 50%;
+  width: 100%;  /* Изображението ще заеме 100% от ширината на контейнера */
+  height: 100%; /* Изображението ще заеме 100% от височината на контейнера */
+  object-fit: cover;  /* Това ще гарантира, че изображението ще запълни кръга, като запази пропорциите */
+  border-radius: 50%;  /* Кръгла форма */
   border-bottom-right-radius: 0;
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
 }
+
+/*до тук*/
+
 
 .team-one__single:hover .team-one__img img {
   transform: scale(1.05);
@@ -9162,6 +9276,7 @@ ul {
 .project-details__img img {
   width: 100%;
   border-radius: var(--agrion-bdr-radius);
+  height: 600px;
 }
 
 .project-details__content {

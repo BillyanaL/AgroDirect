@@ -12,6 +12,9 @@ public class ProductViewDTO {
     private CategoryName category;
     private String imageUrl;
 
+    public ProductViewDTO() {
+    }
+
     public ProductViewDTO(Long id, String name, String description, Double price, Integer quantity, CategoryName category, String imageUrl) {
         this.id = id;
         this.name = name;
