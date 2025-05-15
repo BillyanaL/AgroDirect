@@ -11,11 +11,12 @@ public class UserServiceImpl implements UserService {
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-    }
 
+    }
 
     @Override
     public boolean isUniqueEmail(String email) {
         return this.userRepository.findByEmail(email).isEmpty();
     }
+
 }

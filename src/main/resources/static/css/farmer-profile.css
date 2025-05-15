@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.profile-container {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+
+.profile-image {
+    width: 30%;  /* Увеличаваме ширината на контейнера за снимката */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.profile-image img {
+    /*width: 150px;  !* Задаваме ширината на снимката *!*/
+    height: 210px;  /* Задаваме височината, така че да бъде квадратна */
+    border-radius: 8px;  /* Оставяме леко заоблени ъгли, но можеш да го премахнеш, ако искаш остри ъгли */
+    margin-bottom: 10px;
+}
+
+.profile-image input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+
+.profile-info {
+    width: 75%;
+    padding-left: 30px;
+}
+
+.profile-info h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 14px;
+    color: #333;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.error {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.btn {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn:hover {
+    background-color: #4cae4c;
+}
+
+.success-message {
+    text-align: center;
+    font-size: 27px;
+    color: #d32f2f;
+    font-weight: bold;
+    margin-bottom: 20px;
+    /*background-color: rgba(255, 235, 238, 0.9); */
+    padding: 12px 20px;
+    border-radius: 10px;
+    /*box-shadow: 0 0 10px rgba(211, 47, 47, 0.2);*/
+}
+
+@media screen and (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-image {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .profile-info {
+        width: 100%;
+        padding-left: 0;
+    }
+}

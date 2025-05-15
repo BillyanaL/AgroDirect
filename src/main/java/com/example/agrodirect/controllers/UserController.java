@@ -71,5 +71,4 @@ public class UserController {
         return new ModelAndView("redirect:login");
     }
 
-
 }

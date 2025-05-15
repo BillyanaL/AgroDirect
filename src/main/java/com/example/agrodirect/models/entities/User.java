@@ -34,6 +34,16 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "farmer")
     private List<Product> products;
 
+    @Column(name = "location")
+    private String location;
+
+    @Column(name = "bio", columnDefinition = "TEXT")
+    private String bio;
+
+    @Column(name = "profile_image_url")
+    private String profileImageUrl;
+
+
     public User() {
         this.roles = new HashSet<>();
         this.products = new ArrayList<>();
@@ -90,5 +100,29 @@ public class User extends BaseEntity {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 }

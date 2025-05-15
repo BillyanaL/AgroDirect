@@ -1,11 +1,8 @@
 package com.example.agrodirect.config;
 
-import com.example.agrodirect.models.dtos.AddProductDTO;
+import com.example.agrodirect.models.dtos.FarmerProfileDTO;
 import com.example.agrodirect.models.dtos.UserRegistrationDTO;
-import com.example.agrodirect.models.entities.Category;
-import com.example.agrodirect.models.entities.Product;
 import com.example.agrodirect.models.entities.User;
-import com.example.agrodirect.models.enums.CategoryName;
 import com.example.agrodirect.services.CategoryService;
 import com.example.agrodirect.services.RoleService;
 import com.example.agrodirect.services.helpers.LoggedUserHelperService;
@@ -71,7 +68,6 @@ public class AppConfig {
 //                        .when(Conditions.isNull())
 //                        .with(farmerProvider)
 //                        .map(AddProductDTO::getAuthor, Product::setFarmer));
-
 
         return modelMapper;
 

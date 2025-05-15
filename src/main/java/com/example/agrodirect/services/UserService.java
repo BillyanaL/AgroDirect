@@ -1,7 +1,8 @@
 package com.example.agrodirect.services;
 
-public interface UserService {
+import com.example.agrodirect.models.dtos.FarmerProfileDTO;
 
+public interface UserService {
 
     boolean isUniqueEmail(String value);
 }
