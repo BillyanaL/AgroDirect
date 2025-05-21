@@ -88,4 +88,6 @@ public class UpdateProductDTO {
         this.imageUrl = imageUrl;
         return this;
     }
+
+
 }

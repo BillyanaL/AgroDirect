@@ -15,6 +15,7 @@ public interface ProductService {
 
     UpdateProductDTO getProductById(Long id);
 
+    ProductViewDTO getProduct2ById(Long id);
 
     void update(Long id, UpdateProductDTO updateProductDTO);
 }

@@ -52,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProduct(Long id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Продуктът не е намерен"));
+                .orElseThrow(() -> new IllegalArgumentException("Продуктът не е намерен"));
 
         productRepository.delete(product);
     }
@@ -60,8 +60,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public UpdateProductDTO getProductById(Long id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
+                .orElseThrow(() -> new IllegalArgumentException("Продуктът не е намерен"));
 
         return new UpdateProductDTO()
                 .setName(product.getName())
@@ -73,9 +72,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ProductViewDTO getProduct2ById(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Продуктът не е намерен"));
+
+
+        return this.mapProductToDTO(product);
+    }
+
+
+    @Override
     public void update(Long id, UpdateProductDTO dto) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Продуктът не е намерен"));
+                .orElseThrow(() -> new IllegalArgumentException("Продуктът не е намерен"));
 
         map(dto, product);
 

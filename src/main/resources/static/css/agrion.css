@@ -189,6 +189,55 @@ ul {
   z-index: -1;
 }
 
+/* Общи стилове за съобщенията */
+.alert {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: var(--agrion-font);
+}
+
+/* Стил за грешка */
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Стил за успех */
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+/* Стил за съобщение при грешка в поле */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.invalid-feedback {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: bold;
+}
+.success-message {
+  text-align: center;
+  font-size: 27px;
+  color: #d32f2f;
+  font-weight: bold;
+  margin-bottom: 20px;
+  /*background-color: rgba(255, 235, 238, 0.9); */
+  padding: 12px 20px;
+  border-radius: 10px;
+  /*box-shadow: 0 0 10px rgba(211, 47, 47, 0.2);*/
+}
+
+
 /*--------------------------------------------------------------
 # Custom Cursor
 --------------------------------------------------------------*/
@@ -253,6 +302,7 @@ ul {
   transition: all 0.5s linear;
   overflow: hidden;
   z-index: 1;
+  margin-top: 30px;
 }
 
 .thm-btn i {
@@ -10592,13 +10642,23 @@ ul {
   position: relative;
   display: block;
   overflow: hidden;
+  height: 100%;
 }
 
+/*.product-details__img img {*/
+/*  width: 100%;*/
+/*  border: 1px solid #ece9e0;*/
+/*  border-radius: var(--agrion-bdr-radius);*/
+/*}*/
+
 .product-details__img img {
+  height: 100%;
   width: 100%;
+  object-fit: cover;
   border: 1px solid #ece9e0;
   border-radius: var(--agrion-bdr-radius);
 }
+
 
 
 .product-details__top {
@@ -10662,7 +10722,7 @@ ul {
   font-size: 16px;
   line-height: 30px;
   margin: 0;
-  margin-bottom: 31px;
+  margin-bottom: 20px;
 }
 
 .product-details__content-text2 {
@@ -10675,7 +10735,7 @@ ul {
   position: relative;
   display: flex;
   align-items: center;
-  margin-top: 20px;
+  /*margin-top: 20px;*/
 }
 
 .product-details__quantity-title {
@@ -10743,7 +10803,7 @@ ul {
   display: flex;
   align-items: center;
   margin-bottom: 30px;
-  margin-top: 30px;
+  /*margin-top: 30px;*/
 }
 
 .product-details__buttons-1 {
@@ -11213,56 +11273,128 @@ ul {
   color: var(--agrion-base);
 }
 
+/*.cart-table .quantity-box {*/
+/*  position: relative;*/
+/*  width: 98px;*/
+/*  border-radius: 10px;*/
+/*  height: 50px;*/
+/*}*/
+
+/*.cart-table .quantity-box input {*/
+/*  width: 98px;*/
+/*  border-radius: 10px;*/
+/*  height: 50px;*/
+/*  border: 0;*/
+/*  -webkit-appearance: textfield;*/
+/*  -moz-appearance: textfield;*/
+/*  font-family: var(--agrion-font);*/
+/*  padding-left: 30px;*/
+/*  outline: none;*/
+/*  font-size: 18px;*/
+/*  color: var(--agrion-gray);*/
+/*  font-weight: 700;*/
+/*  background-color: var(--agrion-extra);*/
+/*}*/
+
+/*.cart-table .quantity-box button {*/
+/*  width: 24px;*/
+/*  height: 24px;*/
+/*  background-color: var(--agrion-extra);*/
+/*  color: var(--thm-black);*/
+/*  font-size: 8px;*/
+/*  position: absolute;*/
+/*  top: 1px;*/
+/*  right: 1px;*/
+/*  border-left: 1px solid #ece9e0;*/
+/*  border-top-right-radius: var(--agrion-bdr-radius);*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*  outline: none;*/
+/*  border: none;*/
+/*  border-left: 1px solid #eeede5;*/
+/*}*/
+
+/*.cart-table .quantity-box button.sub {*/
+/*  bottom: 1px;*/
+/*  top: auto;*/
+/*  border-top: 1px solid #ece9e0;*/
+/*  border-top-right-radius: 0px;*/
+/*  border-bottom-right-radius: 10px;*/
+/*}*/
 .cart-table .quantity-box {
+  display: flex;
+  justify-content: center; /* Центрира елементите по хоризонтала */
+  align-items: center; /* Центрира елементите по вертикала */
+  width: 150px;
   position: relative;
-  width: 98px;
-  border-radius: 10px;
-  height: 50px;
 }
 
-.cart-table .quantity-box input {
-  width: 98px;
+.cart-table .quantity-input-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+  padding: 30px;
+}
+
+.cart-table .quantity-input {
+  width: 60px; /* Ширина на полето за въвеждане */
+  height: 40px;
   border-radius: 10px;
-  height: 50px;
-  border: 0;
-  -webkit-appearance: textfield;
-  -moz-appearance: textfield;
-  font-family: var(--agrion-font);
-  padding-left: 30px;
-  outline: none;
-  font-size: 18px;
-  color: var(--agrion-gray);
+  padding-left: 15px; /* Добавяме малко пространство отляво */
+  text-align: center;
+  font-size: 16px;
   font-weight: 700;
-  background-color: var(--agrion-extra);
+  border: 1px solid #ddd;
+  background-color: #f4f4f4;
 }
 
 .cart-table .quantity-box button {
-  width: 24px;
-  height: 24px;
-  background-color: var(--agrion-extra);
-  color: var(--thm-black);
-  font-size: 8px;
-  position: absolute;
-  top: 1px;
-  right: 1px;
-  border-left: 1px solid #ece9e0;
-  border-top-right-radius: var(--agrion-bdr-radius);
+  /*width: 30px;*/
+  /*height: 30px;*/
+  background-color: #f4f4f4;
+  color: #333;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  outline: none;
-  border: none;
-  border-left: 1px solid #eeede5;
+  border-radius: 20%;
+  margin: 0 5px;
+}
+
+.cart-table .quantity-box button:hover {
+  background-color: #ddd;
 }
 
 .cart-table .quantity-box button.sub {
-  bottom: 1px;
-  top: auto;
-  border-top: 1px solid #ece9e0;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 10px;
+  border-radius: 50%;
 }
 
+.cart-table .quantity-box button.add {
+  border-radius: 50%;
+}
+
+.update-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.update-button:hover {
+  background-color: #45a049;
+}
+
+/*до тук*/
 .cart-table .cross-icon {
   position: relative;
   display: block;

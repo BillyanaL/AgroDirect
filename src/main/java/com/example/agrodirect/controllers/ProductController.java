@@ -1,6 +1,7 @@
 package com.example.agrodirect.controllers;
 
 import com.example.agrodirect.models.dtos.AddProductDTO;
+import com.example.agrodirect.models.dtos.ProductViewDTO;
 import com.example.agrodirect.models.dtos.UpdateProductDTO;
 import com.example.agrodirect.services.ProductService;
 import jakarta.validation.Valid;
@@ -102,6 +103,16 @@ public class ProductController {
         redirectAttributes.addFlashAttribute("successMessage", "Продуктът е успешно обновен!");
         return "redirect:/farmer/products/my";
     }
+
+    @GetMapping("/product/{id}")
+    public String viewProductDetails(@PathVariable Long id, Model model) {
+
+        ProductViewDTO product = productService.getProduct2ById(id);
+
+        model.addAttribute("product", product);
+        return "product-details";
+    }
+
 
 
 }
