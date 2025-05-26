@@ -1,0 +1,128 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Моите поръчки - AgroDirect</title>-->
+<!--    <link rel="stylesheet" th:href="@{/css/my-orders.css}" />-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <h2 class="success-title">Успешна поръчка!</h2>-->
+
+<!--    <div th:each="order : ${orders}" class="order-card">-->
+<!--        <div class="order-info">-->
+<!--            <div class="shipping-box">-->
+<!--                <h3>Лични данни</h3>-->
+<!--                <p><strong>Име:</strong> <span th:text="${order.shippingDetails.firstName}"></span></p>-->
+<!--                <p><strong>Фамилия:</strong> <span th:text="${order.shippingDetails.lastName}"></span></p>-->
+<!--                <p><strong>Email:</strong> <span th:text="${order.shippingDetails.email}"></span></p>-->
+<!--                <p><strong>Адрес:</strong> <span th:text="${order.shippingDetails.street}"></span> №<span th:text="${order.shippingDetails.streetNumber}"></span></p>-->
+<!--                <p><strong>Град:</strong> <span th:text="${order.shippingDetails.city}"></span></p>-->
+<!--                <p><strong>Област:</strong> <span th:text="${order.shippingDetails.state}"></span></p>-->
+<!--                <p><strong>Телефон:</strong> <span th:text="${order.shippingDetails.phone}"></span></p>-->
+<!--            </div>-->
+
+<!--            <div class="payment-box">-->
+<!--                <h3>Метод на плащане</h3>-->
+<!--                <p th:text="${order.paymentMethod}"></p>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="products-box">-->
+<!--            <h3>Продукти в поръчката</h3>-->
+<!--            <div class="product-item" th:each="item : ${order.orderItems}">-->
+<!--                <img th:src="@{${item.product.imageUrl}}" alt="Снимка" class="product-img"/>-->
+<!--                <div class="product-details">-->
+<!--                    <p><strong>Име:</strong> <span th:text="${item.product.name}"></span></p>-->
+<!--                    <p><strong>Количество:</strong> <span th:text="${item.quantity}"></span></p>-->
+<!--                    <p><strong>Цена:</strong> <span th:text="${item.price}"></span> лв</p>-->
+<!--                    <p><strong>Статус:</strong> <span th:text="${item.status.displayName}"></span>-->
+<!--                    </p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Моите поръчки - AgroDirect</title>
+    <link rel="stylesheet" th:href="@{/css/my-orders.css}" />
+</head>
+<body>
+<div class="container">
+    <h2 class="success-title">Данни за поръчки</h2>
+
+    <div th:each="order : ${orders}" class="order-card">
+        <!-- Данни за поръчката -->
+        <div class="order-meta">
+            <p><strong>Номер на поръчка:</strong> <span th:text="${order.id}"></span></p>
+            <p><strong>Дата на поръчка:</strong> <span th:text="${order.orderDate}"></span></p>
+            <p><strong>Очаквана доставка:</strong> <span th:text="${order.deliveryDate}"></span></p>
+        </div>
+
+        <div class="order-info">
+            <div class="shipping-box">
+                <h3>Лични данни</h3>
+                <p><strong>Име:</strong> <span th:text="${order.shippingDetails.firstName}"></span></p>
+                <p><strong>Фамилия:</strong> <span th:text="${order.shippingDetails.lastName}"></span></p>
+                <p><strong>Email:</strong> <span th:text="${order.shippingDetails.email}"></span></p>
+                <p><strong>Адрес:</strong> <span th:text="${order.shippingDetails.street}"></span> №<span th:text="${order.shippingDetails.streetNumber}"></span></p>
+                <p><strong>Град:</strong> <span th:text="${order.shippingDetails.city}"></span></p>
+                <p><strong>Област:</strong> <span th:text="${order.shippingDetails.state}"></span></p>
+                <p><strong>Телефон:</strong> <span th:text="${order.shippingDetails.phone}"></span></p>
+            </div>
+
+            <div class="payment-box">
+                <h3>Метод на плащане</h3>
+                <p th:text="${order.paymentMethod}"></p>
+            </div>
+        </div>
+
+        <div class="products-box">
+            <h3>Продукти в поръчката</h3>
+            <div class="product-item" th:each="item : ${order.orderItems}">
+                <img th:src="@{${item.product.imageUrl}}" alt="Снимка" class="product-img"/>
+                <div class="product-details">
+                    <p><strong>Име:</strong> <span th:text="${item.product.name}"></span></p>
+                    <p><strong>Количество:</strong> <span th:text="${item.quantity}"></span></p>
+                    <p><strong>Цена:</strong> <span th:text="${item.price}"></span> лв</p>
+                    <p><strong>Статус:</strong> <span th:text="${item.status.displayName}"></span></p>
+                    <p title="Свържи се директно с фермера, ако имаш въпроси относно продукта.">
+                        <strong>Фермерски имейл:</strong>
+                        <a th:href="'mailto:' + ${item.product.farmer.email}"
+                           th:text="${item.product.farmer.email}"></a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Крайна сума -->
+        <div class="total-box">
+            <p><strong>Обща сума:</strong> <span th:text="${order.totalPrice}"></span> лв</p>
+        </div>
+
+        <h4>Aко имате въпроси относно продукт от Вашата поръчка, може да се свържете с фермера, като му изпратите имейл.</h4>
+
+
+        <div class="order-messages">
+            <h4>Съобщения за доставка</h4>
+            <ul>
+                <li th:each="msg : ${order.messages}">
+                    <p><strong th:text="${#temporals.format(msg.timestamp, 'dd.MM.yyyy HH:mm')}"></strong> -
+                        <span th:text="${msg.content}"></span></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div th:if="${orders == null or orders.isEmpty()}" class="no-orders-box">
+        <p>Все още нямате направени поръчки.</p>
+    </div>
+</div>
+</body>
+</html>

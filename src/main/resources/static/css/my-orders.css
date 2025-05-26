@@ -1,0 +1,118 @@
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.success-title {
+    text-align: center;
+    font-size: 24px;
+    color: green;
+    margin-bottom: 30px;
+}
+
+.order-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    background-color: #fdfdfd;
+}
+
+.order-info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.shipping-box,
+.payment-box {
+    width: 48%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    /*padding: 15px;*/
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.products-box {
+    margin-top: 20px;
+}
+
+.products-box h3 {
+    margin-bottom: 15px;
+}
+
+.product-item {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #e0e0e0;
+    padding: 10px 0;
+}
+
+.product-img {
+    width: 100px;
+    height: auto;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 8px;
+}
+
+.product-details p {
+    margin: 4px 0;
+}
+
+.order-meta {
+    background-color: #f7f7f7;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.order-meta p {
+    margin: 4px 0;
+}
+
+.total-box {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.order-messages {
+    margin-top: 15px;
+    background-color: #f1f8e9;
+    padding: 10px;
+    border-left: 4px solid #8bc34a;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.order-messages ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.order-messages li {
+    margin-bottom: 8px;
+}
+
+.no-orders-box {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    border: 1px dashed #ccc;
+    border-radius: 12px;
+    margin-top: 30px;
+    font-size: 16px;
+    color: #666;
+    font-style: italic;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+

@@ -1,0 +1,129 @@
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+h2 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+.order-card {
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #fdfdfd;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.order-header {
+    background-color: #f3f3f3;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.order-header p {
+    margin: 5px 0;
+}
+
+.shipping-info {
+    margin-bottom: 15px;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+}
+
+.shipping-info h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #34495e;
+}
+
+.shipping-info p {
+    margin: 4px 0;
+}
+
+.product-details {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+    margin-top: 15px;
+}
+
+.product-details h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #34495e;
+}
+
+.product-img {
+    width: 100px;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.product-details p {
+    margin: 5px 0;
+}
+
+form {
+    margin-top: 10px;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+select {
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #256427;
+}
+
+.alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.success-alert {
+    background-color: #e0f8e9;
+    color: #2e7d32;
+    border: 1px solid #c6e6d2;
+}
+
+.error-alert {
+    background-color: #fdecea;
+    color: #c62828;
+    border: 1px solid #f5c6cb;
+}

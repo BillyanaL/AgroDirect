@@ -11,6 +11,7 @@ import com.example.agrodirect.repositories.CartItemRepository;
 import com.example.agrodirect.repositories.CartRepository;
 import com.example.agrodirect.repositories.ProductRepository;
 import com.example.agrodirect.services.CartService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -121,7 +122,20 @@ public class CartServiceImpl implements CartService {
 
     }
 
+    @Override
+    @Transactional
+    public void clearCart(User user) {
+        cartRepository.findByUser(user).ifPresent(cart -> {
+            cartItemRepository.deleteAllByCartId(cart.getId());
+            System.out.println("Количката за потребител " + user.getEmail() + " е изчистена.");
+        });
+    }
+
     private static CartItemsViewDTO mapCartItemToDTO(CartItem cartItem) {
+
+        if (cartItem.getProduct() == null) {
+            throw new IllegalArgumentException("Product cannot be null for CartItem with ID: " + cartItem.getId());
+        }
 
         CartItemsViewDTO cartItemDTO = new CartItemsViewDTO();
         cartItemDTO.setCartItemId(cartItem.getId());

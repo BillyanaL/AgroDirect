@@ -11670,7 +11670,7 @@ ul {
 }
 
 .ship_different_address_title {
-  margin-top: 45px;
+  /*margin-top: 45px;*/
 }
 
 .ship_different_address_title h2 span::before {
@@ -11797,8 +11797,9 @@ ul {
 .checkout__payment {
   background-color: var(--agrion-extra);
   border-radius: var(--agrion-bdr-radius);
-  padding: 49px 47px 18px;
+  padding: 49px 18px;
   margin-bottom: 30px;
+  margin-top: 40px;
 }
 
 .checkout__payment__item+.checkout__payment__item {

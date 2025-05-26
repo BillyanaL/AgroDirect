@@ -46,6 +46,7 @@ public class LoggedUserHelperService {
         return getUserDetails().getUsername();
     }
 
+
     public boolean hasRole(UserRoles userRoles) {
         return getAuthentication().getAuthorities().stream()
                 .anyMatch(role -> role.getAuthority().equals("ROLE_" + userRoles));
