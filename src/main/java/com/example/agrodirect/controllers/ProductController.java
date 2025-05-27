@@ -1,9 +1,12 @@
 package com.example.agrodirect.controllers;
 
 import com.example.agrodirect.models.dtos.AddProductDTO;
+import com.example.agrodirect.models.dtos.AddReviewDTO;
 import com.example.agrodirect.models.dtos.ProductViewDTO;
 import com.example.agrodirect.models.dtos.UpdateProductDTO;
 import com.example.agrodirect.services.ProductService;
+import com.example.agrodirect.services.ReviewService;
+import com.example.agrodirect.services.helpers.LoggedUserHelperService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +26,14 @@ public class ProductController {
     public static final String DOT = ".";
 
     private final ProductService productService;
+    private final ReviewService reviewService;
 
-    public ProductController(ProductService productService) {
+    private final LoggedUserHelperService loggedUserHelperService;
+
+    public ProductController(ProductService productService, ReviewService reviewService, LoggedUserHelperService loggedUserHelperService) {
         this.productService = productService;
+        this.reviewService = reviewService;
+        this.loggedUserHelperService = loggedUserHelperService;
     }
 
     @GetMapping("/farmer/products/my")
@@ -110,6 +118,16 @@ public class ProductController {
         ProductViewDTO product = productService.getProduct2ById(id);
 
         model.addAttribute("product", product);
+
+        model.addAttribute("reviews", reviewService.getAllReviewViewsByProductId(id));
+        model.addAttribute("loggedUser", loggedUserHelperService.get());
+
+        double avgRating = reviewService.getAverageRatingForProduct(id);
+        String formattedRating = String.format("%.1f", avgRating);
+
+        model.addAttribute("averageRating", formattedRating);
+
+        model.addAttribute("reviewDTO", new AddReviewDTO());
         return "product-details";
     }
 

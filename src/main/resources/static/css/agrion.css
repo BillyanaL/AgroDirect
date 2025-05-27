@@ -11065,6 +11065,23 @@ ul {
   margin: 0px;
 }
 
+.review-one__content-top .reply-btn i {
+  font-size: 16px;
+  color: #ffc107; /* за запълнените звезди */
+  margin-right: 2px;
+}
+
+/* Празни звезди – ясно очертани */
+.review-one__content-top .reply-btn .fa-star-o {
+  color: #999; /* сив тон за контур */
+}
+
+/* Пълни звезди – златисто */
+.review-one__content-top .reply-btn .fa-star {
+  color: #ffc107;
+}
+
+
 /*--------------------------------------------------------------
 # Review Form One
 --------------------------------------------------------------*/
@@ -11168,6 +11185,26 @@ ul {
   border: none;
   padding-left: 50px;
 }
+
+/* Стил за звездите в формата */
+#star-rating i {
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  color: #000; /* по подразбиране: черен контур за всички */
+}
+
+/* Когато са активни (оцветени) - златни */
+#star-rating .fa-star {
+  color: #ffc107;
+}
+
+#star-rating .fa-star-o {
+  color: #e7ab44;
+  /*text-shadow: 0 0 2px #000;*/
+}
+
+
 
 /*--------------------------------------------------------------
 # Cart Page

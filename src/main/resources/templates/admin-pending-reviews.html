@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="bg"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Неодобрени ревюта</title>
+
+    <link rel="stylesheet" th:href="@{/css/admin-pending-reviews.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Font / икони ако ползваш -->
+    <link rel="stylesheet" th:href="@{/vendors/bootstrap/css/bootstrap.min.css}">
+</head>
+
+<body>
+
+<!-- 👉 По избор: шапка / навигация (може да вмъкнеш фрагмент или include) -->
+<!-- <th:block th:replace="fragments/header :: header"></th:block> -->
+
+<!-- 🟩 Контейнер с ревютата -->
+<div class="admin-reviews-container">
+    <h2>Неодобрени ревюта</h2>
+
+    <div th:if="${#lists.isEmpty(pendingReviews)}" class="no-reviews">
+        Няма чакащи ревюта за одобрение.
+    </div>
+
+    <div th:each="review : ${pendingReviews}" class="review-block">
+        <div class="review-details">
+            <p><strong>Продукт:</strong> <span th:text="${review.productName}"></span></p>
+            <p><strong>Потребител:</strong> <span th:text="${review.fullName}"></span></p>
+            <p><strong>Оценка:</strong> <span th:text="${review.rating}"></span> ⭐</p>
+            <p><strong>Коментар:</strong> <span th:text="${review.content}"></span></p>
+            <p><strong>Дата:</strong> <span th:text="${#temporals.format(review.createdOn, 'dd.MM.yyyy HH:mm')}"></span></p>
+        </div>
+
+        <div class="actions">
+            <form th:action="@{'/admin/reviews/' + ${review.id} + '/approve'}" method="post">
+                <button type="submit" class="thm-btn approve">✅ Одобри</button>
+            </form>
+            <form th:action="@{'/admin/reviews/' + ${review.id} + '/delete'}" method="post">
+                <button type="submit" class="thm-btn delete">🗑 Изтрий</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- 👉 По избор: footer -->
+<!-- <th:block th:replace="fragments/footer :: footer"></th:block> -->
+
+<!-- Скриптове ако ползваш Bootstrap или JS -->
+<script th:src="@{/vendors/jquery/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/vendors/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>

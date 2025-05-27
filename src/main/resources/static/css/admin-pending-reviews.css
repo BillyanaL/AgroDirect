@@ -1,0 +1,93 @@
+.admin-reviews-container {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: var(--agrion-bdr-radius);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.05);
+    font-family: var(--agrion-font);
+}
+
+.admin-reviews-container h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--agrion-base);
+    margin-bottom: 30px;
+}
+
+.review-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 25px 0;
+}
+
+.review-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.review-details p {
+    margin: 0;
+    font-size: 16px;
+    color: var(--agrion-gray);
+}
+
+.review-block .actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.review-block form {
+    display: inline-block;
+}
+
+.review-block .thm-btn {
+    padding: 10px 24px;
+    font-size: 14px;
+    border-radius: var(--agrion-bdr-radius);
+    border: none;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.review-block .thm-btn.approve {
+    background-color: forestgreen;
+    color: #fff;
+}
+
+.review-block .thm-btn.approve:hover {
+    background-color: darkgreen;
+}
+
+.review-block .thm-btn.delete {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.review-block .thm-btn.delete:hover {
+    background-color: #c82333;
+}
+
+.no-reviews {
+    text-align: center;
+    font-size: 18px;
+    color: var(--agrion-gray);
+    margin-top: 40px;
+}
+
+/* Responsive: при екрани под 768px -> 1 колона */
+@media (max-width: 768px) {
+    .review-details {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-reviews-container {
+        padding: 20px;
+    }
+}
