@@ -12,6 +12,8 @@ public class ProductViewDTO {
     private CategoryName category;
     private String imageUrl;
 
+    private Double averageRating;
+
     public ProductViewDTO() {
     }
 
@@ -23,6 +25,17 @@ public class ProductViewDTO {
         this.quantity = quantity;
         this.category = category;
         this.imageUrl = imageUrl;
+    }
+
+    public ProductViewDTO(Long id, String name, String description, Double price, Integer quantity, CategoryName category, String imageUrl, Double averageRating) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.category = category;
+        this.imageUrl = imageUrl;
+        this.averageRating = averageRating;
     }
 
     public Long getId() {
@@ -79,5 +92,13 @@ public class ProductViewDTO {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(Double averageRating) {
+        this.averageRating = averageRating;
     }
 }

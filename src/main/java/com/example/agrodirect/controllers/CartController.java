@@ -58,7 +58,10 @@ public class CartController {
         double totalCartPrice = cartService.calculateTotalCartPrice(user);
 
         model.addAttribute("cartItems", cartItems);
-        model.addAttribute("totalCartPrice", totalCartPrice);
+
+        String formattedTotalPrice = String.format("%.2f",totalCartPrice);
+
+        model.addAttribute("totalCartPrice", formattedTotalPrice);
 
         return "cart";
     }

@@ -10224,6 +10224,33 @@ ul {
   position: relative;
 }
 
+
+.search-form {
+  position: relative;
+  width: 100%;
+}
+
+.search-form input[type="text"] {
+  width: 100%;
+  padding: 10px 40px 10px 15px; /* padding-right за място за иконата */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.search-form button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #666;
+  font-size: 16px;
+  padding: 0;
+}
+
 .shop-search form input[type=search],
 .shop-search form input[type=text] {
   width: 100%;
@@ -10511,6 +10538,7 @@ ul {
 }
 
 .product__all-img {
+  height: 300px;
   position: relative;
   display: block;
   border: 1px solid #ece9e0;
@@ -10525,6 +10553,8 @@ ul {
   border-radius: var(--agrion-bdr-radius);
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
+  height: 100%;
+  object-fit: cover;
 }
 
 .product__all-single:hover .product__all-img img {

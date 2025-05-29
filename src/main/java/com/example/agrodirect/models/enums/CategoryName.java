@@ -10,5 +10,20 @@ public enum CategoryName {
     GRAINS,
     HONEY,
     HERBS,
-    JAMS
+    JAMS;
+
+
+    public String getDisplayName() {
+        return switch (this) {
+            case VEGETABLES -> "🥦 Зеленчуци";
+            case FRUITS -> "🍎 Плодове";
+            case DAIRY -> "🧀 Млечни";
+            case MEAT -> "🥩 Месо";
+            case EGGS -> "🥚 Яйца";
+            case GRAINS -> "🌾 Зърнени";
+            case HONEY -> "🍯 Мед";
+            case HERBS -> "🌿 Билки";
+            case JAMS -> "🍓 Сладка";
+        };
+    }
 }

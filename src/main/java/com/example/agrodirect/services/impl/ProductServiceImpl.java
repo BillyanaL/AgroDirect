@@ -3,17 +3,19 @@ package com.example.agrodirect.services.impl;
 import com.example.agrodirect.models.dtos.AddProductDTO;
 import com.example.agrodirect.models.dtos.ProductViewDTO;
 import com.example.agrodirect.models.dtos.UpdateProductDTO;
+import com.example.agrodirect.models.entities.Review;
 import com.example.agrodirect.models.entities.Category;
 import com.example.agrodirect.models.entities.Product;
 import com.example.agrodirect.models.entities.User;
+import com.example.agrodirect.models.enums.CategoryName;
 import com.example.agrodirect.repositories.ProductRepository;
+import com.example.agrodirect.repositories.ReviewRepository;
 import com.example.agrodirect.services.CategoryService;
 import com.example.agrodirect.services.ProductService;
 import com.example.agrodirect.services.helpers.LoggedUserHelperService;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -23,10 +25,13 @@ public class ProductServiceImpl implements ProductService {
     private final LoggedUserHelperService loggedUserHelperService;
     private final ProductRepository productRepository;
 
-    public ProductServiceImpl(CategoryService categoryService, LoggedUserHelperService loggedUserHelperService, ProductRepository productRepository) {
+    private final ReviewRepository reviewRepository;
+
+    public ProductServiceImpl(CategoryService categoryService, LoggedUserHelperService loggedUserHelperService, ProductRepository productRepository, ReviewRepository reviewRepository) {
         this.categoryService = categoryService;
         this.loggedUserHelperService = loggedUserHelperService;
         this.productRepository = productRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     @Override
@@ -94,6 +99,45 @@ public class ProductServiceImpl implements ProductService {
         productRepository.save(product);
     }
 
+    @Override
+    public List<ProductViewDTO> getFilteredProducts(String keyword, String category, String sort) {
+        CategoryName categoryName = null;
+        if (category != null && !category.isBlank()) {
+            try {
+                categoryName = CategoryName.valueOf(category.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                return List.of(); 
+            }
+        }
+
+        CategoryName finalCategoryName = categoryName;
+
+        List<ProductViewDTO> products = productRepository.findAll().stream()
+                .filter(p -> keyword == null || keyword.isBlank() || p.getName().toLowerCase().contains(keyword.toLowerCase()))
+                .filter(p -> finalCategoryName == null || p.getCategory().getName() == finalCategoryName)
+                .map(this::mapProductToDTO)
+                .sorted(getComparator(sort))
+                .toList();
+
+        return products;
+    }
+
+    private Comparator<ProductViewDTO> getComparator(String sort) {
+
+        if (sort == null) {
+            return (a, b) -> 0;
+        }
+
+        return switch (sort) {
+            case "priceAsc" -> Comparator.comparing(ProductViewDTO::getPrice);
+            case "priceDesc" -> Comparator.comparing(ProductViewDTO::getPrice).reversed();
+            case "ratingAsc" -> Comparator.comparing(ProductViewDTO::getAverageRating, Comparator.nullsLast(Double::compareTo));
+            case "ratingDesc" -> Comparator.comparing(ProductViewDTO::getAverageRating, Comparator.nullsLast(Double::compareTo)).reversed();
+            default -> (a, b) -> 0; // без сортиране
+        };
+    }
+
+
     private static void map(UpdateProductDTO dto, Product product) {
         product.setName(dto.getName());
         product.setDescription(dto.getDescription());
@@ -103,6 +147,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private ProductViewDTO mapProductToDTO(Product product){
+
+        List<Review> approvedReviews = reviewRepository.findAllByProductAndApprovedTrue(product);
+
+        double avgRating = approvedReviews.stream()
+                .mapToInt(Review::getRating)
+                .average()
+                .orElse(0.0);
+
         return new ProductViewDTO(
                 product.getId(),
                 product.getName(),
@@ -110,7 +162,9 @@ public class ProductServiceImpl implements ProductService {
                 product.getPrice(),
                 product.getQuantity(),
                 product.getCategory().getName(),
-                product.getImageUrl()
+                product.getImageUrl(),
+                avgRating
+
         );
     }
 

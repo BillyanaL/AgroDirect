@@ -18,4 +18,6 @@ public interface ProductService {
     ProductViewDTO getProduct2ById(Long id);
 
     void update(Long id, UpdateProductDTO updateProductDTO);
+
+    List<ProductViewDTO> getFilteredProducts(String keyword, String category, String sort);
 }

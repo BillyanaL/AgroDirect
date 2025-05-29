@@ -1,9 +1,7 @@
 package com.example.agrodirect.controllers;
 
-import com.example.agrodirect.models.dtos.AddProductDTO;
-import com.example.agrodirect.models.dtos.AddReviewDTO;
-import com.example.agrodirect.models.dtos.ProductViewDTO;
-import com.example.agrodirect.models.dtos.UpdateProductDTO;
+import com.example.agrodirect.models.dtos.*;
+import com.example.agrodirect.models.enums.CategoryName;
 import com.example.agrodirect.services.ProductService;
 import com.example.agrodirect.services.ReviewService;
 import com.example.agrodirect.services.helpers.LoggedUserHelperService;
@@ -11,12 +9,11 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 
 @Controller
@@ -130,6 +127,39 @@ public class ProductController {
         model.addAttribute("reviewDTO", new AddReviewDTO());
         return "product-details";
     }
+
+//    @GetMapping("/products")
+//    public String showAllProducts(@RequestParam(required = false) String sort, Model model) {
+////        List<ProductViewDTO> products = productService.getAllProducts();
+//
+//        List<ProductViewDTO> products = productService.getAllSorted(sort);
+//
+//        model.addAttribute("products", products);
+//        model.addAttribute("totalProductCount", products.size());
+//
+//        return "products";
+//    }
+
+    @GetMapping("/products")
+    public String showAllProducts(@RequestParam(required = false) String sort,
+                                  @RequestParam(required = false) String keyword,
+                                  @RequestParam(required = false) String category,
+                                  Model model) {
+
+        List<ProductViewDTO> products = productService.getFilteredProducts(keyword, category, sort);
+
+        model.addAttribute("products", products);
+        model.addAttribute("totalProductCount", products.size());
+        model.addAttribute("categories", CategoryName.values());
+
+        model.addAttribute("selectedSort", sort);
+        model.addAttribute("selectedKeyword", keyword);
+        model.addAttribute("selectedCategory", category);
+
+        return "products";
+    }
+
+
 
 
 

@@ -1,6 +1,7 @@
 package com.example.agrodirect.repositories;
 
 import com.example.agrodirect.models.dtos.ReviewViewDTO;
+import com.example.agrodirect.models.entities.Product;
 import com.example.agrodirect.models.entities.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +20,5 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     List<Review> findAllByProductIdOrderByCreatedOnDesc(Long productId);
 
+    List<Review> findAllByProductAndApprovedTrue(Product product);
 }
