@@ -106,7 +106,7 @@ public class ProductServiceImpl implements ProductService {
             try {
                 categoryName = CategoryName.valueOf(category.toUpperCase());
             } catch (IllegalArgumentException e) {
-                return List.of(); 
+                return List.of();
             }
         }
 
@@ -133,7 +133,7 @@ public class ProductServiceImpl implements ProductService {
             case "priceDesc" -> Comparator.comparing(ProductViewDTO::getPrice).reversed();
             case "ratingAsc" -> Comparator.comparing(ProductViewDTO::getAverageRating, Comparator.nullsLast(Double::compareTo));
             case "ratingDesc" -> Comparator.comparing(ProductViewDTO::getAverageRating, Comparator.nullsLast(Double::compareTo)).reversed();
-            default -> (a, b) -> 0; // без сортиране
+            default -> (a, b) -> 0; // without sorting
         };
     }
 

@@ -5,6 +5,7 @@ import com.example.agrodirect.models.dtos.ReviewViewDTO;
 import com.example.agrodirect.models.entities.Review;
 import com.example.agrodirect.models.entities.User;
 import com.example.agrodirect.models.enums.UserRoles;
+import com.example.agrodirect.repositories.ArticleRepository;
 import com.example.agrodirect.repositories.ProductRepository;
 import com.example.agrodirect.repositories.ReviewRepository;
 import com.example.agrodirect.services.ReviewService;
@@ -23,10 +24,13 @@ public class ReviewServiceImpl implements ReviewService {
 
     private final LoggedUserHelperService loggedUserHelperService;
 
-    public ReviewServiceImpl(ProductRepository productRepository, ReviewRepository reviewRepository, LoggedUserHelperService loggedUserHelperService) {
+    private final ArticleRepository articleRepository;
+
+    public ReviewServiceImpl(ProductRepository productRepository, ReviewRepository reviewRepository, LoggedUserHelperService loggedUserHelperService, ArticleRepository articleRepository) {
         this.productRepository = productRepository;
         this.reviewRepository = reviewRepository;
         this.loggedUserHelperService = loggedUserHelperService;
+        this.articleRepository = articleRepository;
     }
 
     @Override
@@ -42,6 +46,13 @@ public class ReviewServiceImpl implements ReviewService {
         Double average = reviewRepository.findAverageRatingByProductId(productId);
         return average != null ? average : 0.0;
     }
+
+    @Override
+    public double getAverageRatingForArticle(Long articleId) {
+        Double average = reviewRepository.findAverageRatingByArticleId(articleId);
+        return average != null ? average : 0.0;
+    }
+
 
     @Override
     public List<ReviewViewDTO> getPendingReviewDTOs() {
@@ -69,7 +80,17 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public List<ReviewViewDTO> getAllReviewViewsByProductId(Long productId) {
+        List<Review> reviews = reviewRepository.findAllByProductIdOrderByCreatedOnDesc(productId);
+        return filterAndMapReviews(reviews);
+    }
 
+    @Override
+    public List<ReviewViewDTO> getAllReviewViewsByArticleId(Long articleId) {
+        List<Review> reviews = reviewRepository.findAllByArticleIdOrderByCreatedOnDesc(articleId);
+        return filterAndMapReviews(reviews);
+    }
+
+    private List<ReviewViewDTO> filterAndMapReviews(List<Review> reviews) {
         User currentUser = loggedUserHelperService.get();
         Long loggedUserId = currentUser.getId();
 
@@ -77,8 +98,7 @@ public class ReviewServiceImpl implements ReviewService {
                 .stream()
                 .anyMatch(role -> role.getName().equals(UserRoles.ADMIN));
 
-        return reviewRepository.findAllByProductIdOrderByCreatedOnDesc(productId)
-                .stream()
+        return reviews.stream()
                 .filter(review ->
                         isAdmin || review.isApproved() || review.getUser().getId().equals(loggedUserId))
                 .map(this::mapReviewToDTO)
@@ -94,27 +114,43 @@ public class ReviewServiceImpl implements ReviewService {
         dto.setId(review.getId());
         dto.setUserId(user.getId());
         dto.setFullName(fullName);
-        dto.setProductName(review.getProduct().getName());
         dto.setRating(review.getRating());
         dto.setContent(review.getContent());
         dto.setCreatedOn(review.getCreatedOn());
         dto.setApproved(review.isApproved());
+
+        if (review.getProduct() != null) {
+            dto.setProductName(review.getProduct().getName());
+            dto.setProductId(review.getProduct().getId());
+        }
+
+        if (review.getArticle() != null) {
+            dto.setArticleTitle(review.getArticle().getTitle());
+            dto.setArticleId(review.getArticle().getId());
+        }
+
         return dto;
     }
 
-
-    private Review mapAddReviewDTtoToReview(AddReviewDTO addReviewDTO){
-
+    private Review mapAddReviewDTtoToReview(AddReviewDTO addReviewDTO) {
         User currentUser = loggedUserHelperService.get();
 
         Review review = new Review();
         review.setUser(currentUser);
-        review.setProduct(productRepository.findById(addReviewDTO.getProductId())
-                .orElseThrow(() -> new IllegalArgumentException("Продуктът не е намерен.")));
         review.setRating(addReviewDTO.getRating());
         review.setContent(addReviewDTO.getContent());
         review.setCreatedOn(LocalDateTime.now());
         review.setApproved(false);
+
+        if (addReviewDTO.getProductId() != null) {
+            review.setProduct(productRepository.findById(addReviewDTO.getProductId())
+                    .orElseThrow(() -> new IllegalArgumentException("Продуктът не е намерен.")));
+        } else if (addReviewDTO.getArticleId() != null) {
+            review.setArticle(articleRepository.findById(addReviewDTO.getArticleId())
+                    .orElseThrow(() -> new IllegalArgumentException("Статията не е намерена.")));
+        } else {
+            throw new IllegalArgumentException("Липсва продукт или статия за ревюто.");
+        }
 
         return review;
     }

@@ -17,6 +17,8 @@ public class AddReviewDTO {
 
     private Long productId;
 
+    private Long articleId;
+
     public String getContent() {
         return content;
     }
@@ -39,5 +41,13 @@ public class AddReviewDTO {
 
     public void setProductId(Long productId) {
         this.productId = productId;
+    }
+
+    public Long getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(Long articleId) {
+        this.articleId = articleId;
     }
 }

@@ -8,9 +8,14 @@ public class ReviewViewDTO {
 
     private Long userId;
 
+    private Long productId;
+    private Long articleId;
+
     private String fullName;
 
     private String productName;
+
+    private String articleTitle;
 
     private int rating;
     private String content;
@@ -81,5 +86,29 @@ public class ReviewViewDTO {
 
     public void setApproved(boolean approved) {
         this.approved = approved;
+    }
+
+    public String getArticleTitle() {
+        return articleTitle;
+    }
+
+    public void setArticleTitle(String articleTitle) {
+        this.articleTitle = articleTitle;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(Long articleId) {
+        this.articleId = articleId;
     }
 }

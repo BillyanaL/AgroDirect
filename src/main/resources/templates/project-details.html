@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8" />
@@ -369,28 +369,34 @@
 
                         <div class="col-xl-4 col-lg-4">
                             <div class="project-details__content-right">
-<
                                 <div class="project-details__quote">
-                                    <h3 class="project-details__quote-title">Get Free Quote</h3>
-                                    <form action="/inc/sendemail.php"
-                                        class="comment-one__form contact-form-validated" novalidate="novalidate">
+                                    <h3 class="project-details__quote-title">Изпрати съобщение до фермера</h3>
+
+<!--                                    <div th:if="${successMessage}" class="custom-success-message">-->
+<!--                                        <span th:text="${successMessage}">Съобщението беше изпратено успешно!</span>-->
+<!--                                    </div>-->
+
+                                    <!-- Формата за контакт -->
+                                    <form th:action="@{'/farmers/' + ${farmerProfileDetailsViewDTO.id} + '/contact'}" method="post"
+                                          class="comment-one__form contact-form-validated" novalidate="novalidate">
+
                                         <div class="project-details__input-box">
-                                            <input type="text" placeholder="Your name" name="name">
+                                            <input type="text" name="name" placeholder="Вашето име" required>
                                         </div>
                                         <div class="project-details__input-box">
-                                            <input type="email" placeholder="Email address" name="email">
+                                            <input type="email" name="email" placeholder="Вашият имейл" required>
                                         </div>
                                         <div class="project-details__input-box text-message-box">
-                                            <textarea name="message" placeholder="Write a Message"></textarea>
+                                            <textarea name="message" placeholder="Вашето съобщение" required></textarea>
                                         </div>
                                         <div class="project-details__btn-box">
-                                            <a href="about.html" class="thm-btn project-details__btn">Send Message <i
-                                                    class="icon-right-arrow"></i> </a>
+                                            <button type="submit" class="thm-btn project-details__btn">Изпрати съобщение <i class="icon-right-arrow"></i></button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 

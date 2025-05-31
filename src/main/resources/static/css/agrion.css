@@ -206,11 +206,40 @@ ul {
 }
 
 /* Стил за успех */
+/*.alert-success {*/
+/*  background-color: #d4edda;*/
+/*  color: #155724;*/
+/*  border: 1px solid #c3e6cb;*/
+/*}*/
+
 .alert-success {
   background-color: #d4edda;
   color: #155724;
   border: 1px solid #c3e6cb;
+  font-size: 16px;        /* увери се, че е четим размер */
+  visibility: visible;    /* увери се, че е видим */
+  display: block;         /* не е скрит */
+  padding: 10px;
+  margin-top: 10px;
 }
+.custom-success-message {
+  background-color: #d4edda;         /* зеленикав фон */
+  color: #155724;                    /* тъмен текст */
+  border: 1px solid #c3e6cb;         /* зелен бордер */
+  padding: 12px 18px;
+  margin: 15px 0;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* леко изпъкване */
+
+  /* За да се уверим, че не се скрива */
+  display: block !important;
+  visibility: visible !important;
+}
+
+
 
 /* Стил за съобщение при грешка в поле */
 .error {
@@ -4487,6 +4516,7 @@ ul {
   position: relative;
   display: block;
   margin-bottom: 30px;
+  min-height: 200px;
 }
 
 .blog-one__img {
@@ -4496,6 +4526,7 @@ ul {
   border-top-left-radius: var(--agrion-bdr-radius);
   border-top-right-radius: var(--agrion-bdr-radius);
   z-index: 1;
+  height: 350px
 }
 
 .blog-one__img:before {
@@ -4531,6 +4562,8 @@ ul {
   border-top-left-radius: var(--agrion-bdr-radius);
   border-top-right-radius: var(--agrion-bdr-radius);
   transition: all 500ms ease;
+  height: 100%;
+  object-fit: cover;
 }
 
 .blog-one__single:hover .blog-one__img img {
@@ -4611,6 +4644,14 @@ ul {
   color: var(--agrion-black);
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* макс 3 реда */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 4em;
+
 }
 
 .blog-one__title a:hover {

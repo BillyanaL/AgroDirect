@@ -30,7 +30,13 @@
 
     <div th:each="review : ${pendingReviews}" class="review-block">
         <div class="review-details">
-            <p><strong>Продукт:</strong> <span th:text="${review.productName}"></span></p>
+
+            <p>
+                <strong>Отнася се за:</strong>
+                <span th:if="${review.productName != null}" th:text="'Продукт: ' + ${review.productName}"></span>
+                <span th:if="${review.articleTitle != null}" th:text="'Статия: ' + ${review.articleTitle}"></span>
+            </p>
+
             <p><strong>Потребител:</strong> <span th:text="${review.fullName}"></span></p>
             <p><strong>Оценка:</strong> <span th:text="${review.rating}"></span> ⭐</p>
             <p><strong>Коментар:</strong> <span th:text="${review.content}"></span></p>
@@ -44,6 +50,15 @@
             <form th:action="@{'/admin/reviews/' + ${review.id} + '/delete'}" method="post">
                 <button type="submit" class="thm-btn delete">🗑 Изтрий</button>
             </form>
+
+            <form th:if="${review.productId != null}" th:action="@{'/product/' + ${review.productId}}" method="get">
+                <button type="submit" class="thm-btn">🔍 Преглед</button>
+            </form>
+
+            <form th:if="${review.articleId != null}" th:action="@{'/farmer/articles/details/' + ${review.articleId}}" method="get">
+                <button type="submit" class="thm-btn">🔍 Преглед</button>
+            </form>
+
         </div>
     </div>
 </div>

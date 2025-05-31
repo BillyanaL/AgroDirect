@@ -1,0 +1,80 @@
+/* Основен контейнер */
+.blog-page {
+    background-color: #f9f9f9;
+    padding: 40px 0;
+}
+
+/* Заглавна секция */
+.section-title__tagline {
+    font-size: 16px;
+    color: #8fb339;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.section-title__title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Картички със статии */
+.card {
+    border-radius: 12px;
+    border: none;
+    transition: 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Копчета */
+.btn {
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+.btn-warning {
+    background-color: #f6c23e;
+    border-color: #f6c23e;
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: #e74a3b;
+    border-color: #e74a3b;
+}
+
+.btn-outline-success {
+    border-color: #8fb339;
+    color: white;
+    background: forestgreen;
+}
+
+.btn-outline-success:hover {
+    background-color: #8fb339;
+    color: white;
+}
+
+/* Статус */
+.card-text small {
+    display: block;
+    color: #666;
+}
+
+.text-muted {
+    font-size: 13px;
+    color: #888 !important;
+}

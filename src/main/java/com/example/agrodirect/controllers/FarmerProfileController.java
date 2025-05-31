@@ -8,10 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -56,7 +53,7 @@ public class FarmerProfileController {
     }
 
     @GetMapping("/farmers/{id}")
-    public ModelAndView viewFarmerProfile(@PathVariable Long id) {
+    public ModelAndView viewFarmerProfile(@PathVariable Long id, Model model, @ModelAttribute("successMessage") String successMessage) {
 
         FarmerProfileDetailsViewDTO farmerDTO = farmerService.getFarmerProfileById(id);
         List<ProductViewDTO> products = farmerDTO.getProducts();
@@ -65,8 +62,15 @@ public class FarmerProfileController {
         modelAndView.addObject("farmerProfileDetailsViewDTO", farmerDTO);
         modelAndView.addObject("products", products);
 
+        System.out.println("Tuk sym");
+
+        if (successMessage != null && !successMessage.isBlank()) {
+            model.addAttribute("successMessage", successMessage);
+        }
+
         return modelAndView;
     }
+
 
     @GetMapping("/farmers")
     public String viewFarmers(Model model) {
@@ -74,4 +78,21 @@ public class FarmerProfileController {
         model.addAttribute("farmers", farmers);
         return "farmers";
     }
+
+    @PostMapping("/farmers/{id}/contact")
+    public String contactFarmer(@PathVariable Long id,
+                                @RequestParam String name,
+                                @RequestParam String email,
+                                @RequestParam String message,
+                                RedirectAttributes redirectAttributes) {
+
+        System.out.println("Фермер ID: " + id);
+        System.out.println("От: " + name + ", имейл: " + email);
+        System.out.println("Съобщение: " + message);
+
+        redirectAttributes.addFlashAttribute("successMessage", "Съобщението беше изпратено успешно (симулация).");
+
+        return "redirect:/farmers/" + id;
+    }
+
 }

@@ -128,18 +128,6 @@ public class ProductController {
         return "product-details";
     }
 
-//    @GetMapping("/products")
-//    public String showAllProducts(@RequestParam(required = false) String sort, Model model) {
-////        List<ProductViewDTO> products = productService.getAllProducts();
-//
-//        List<ProductViewDTO> products = productService.getAllSorted(sort);
-//
-//        model.addAttribute("products", products);
-//        model.addAttribute("totalProductCount", products.size());
-//
-//        return "products";
-//    }
-
     @GetMapping("/products")
     public String showAllProducts(@RequestParam(required = false) String sort,
                                   @RequestParam(required = false) String keyword,

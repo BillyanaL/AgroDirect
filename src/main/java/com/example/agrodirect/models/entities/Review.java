@@ -29,6 +29,10 @@ public class Review extends BaseEntity{
     @ManyToOne
     private Product product;
 
+    @ManyToOne
+    private Article article;
+
+
     private LocalDateTime createdOn;
 
     public String getContent() {
@@ -77,5 +81,13 @@ public class Review extends BaseEntity{
 
     public void setApproved(boolean approved) {
         this.approved = approved;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
     }
 }
