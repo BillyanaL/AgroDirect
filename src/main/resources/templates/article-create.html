@@ -5,6 +5,7 @@
     <title>Създай статия - AgroDirect</title>
     <link rel="stylesheet" th:href="@{/css/article-create.css}">
     <link rel="stylesheet" th:href="@{/vendors/bootstrap/css/bootstrap.min.css}">
+
 </head>
 <body>
 
@@ -23,8 +24,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="title">Заглавие</label>
-                                <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:class="'invalid-feedback rounded'"></small>
-                                <input type="text" id="title" th:field="*{title}" class="form-control" placeholder="Въведи заглавие">
+                                <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:class="invalid-feedback"></small>
+                                <input type="text" id="title" th:field="*{title}" class="form-control"  placeholder="Въведи заглавие">
                             </div>
 
                             <div class="col-md-12 mt-3">

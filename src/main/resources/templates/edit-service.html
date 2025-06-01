@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирай услуга | AgroDirect</title>
+    <link rel="stylesheet" th:href="@{/vendors/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/add-service.css}" />
+
+
+</head>
+<body>
+
+<section class="contact-one">
+    <div class="container">
+        <div class="sec-title text-center">
+            <h2 class="sec-title__title">Редактирай услугата</h2>
+            <p>Промени информацията по-долу и запази промените</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10">
+                <form th:action="@{'/farmer/service/edit/' + ${editServiceDTO.id}}"
+                      th:object="${editServiceDTO}" method="post" class="contact-one__form">
+
+                    <!-- Заглавие -->
+                    <div class="form-group">
+                        <label for="title">Заглавие *</label>
+                        <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger">Грешка</small>
+                        <input type="text" id="title" th:field="*{title}" class="form-control" placeholder="напр. Оране на нива" required>
+                    </div>
+
+                    <!-- Описание -->
+                    <div class="form-group">
+                        <label for="description">Описание *</label>
+                        <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger">Грешка</small>
+                        <textarea th:field="*{description}" id="description" class="form-control" rows="5"
+                                  placeholder="Описание" required></textarea>
+                    </div>
+
+                    <!-- Категория -->
+                    <div class="form-group">
+                        <label for="category">Категория *</label>
+                        <small th:if="${#fields.hasErrors('category')}" th:errors="*{category}" class="text-danger">Грешка</small>
+                        <select th:field="*{category}" id="category" class="form-control" required>
+                            <option th:each="cat : ${T(com.example.agrodirect.models.enums.ServiceCategory).values()}"
+                                    th:value="${cat}"
+                                    th:text="${cat.displayName}"></option>
+                        </select>
+                    </div>
+
+                    <!-- Телефон -->
+                    <div class="form-group">
+                        <label for="phoneNumber">Телефон *</label>
+                        <small th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="text-danger">Грешка</small>
+                        <input type="text" th:field="*{phoneNumber}" id="phoneNumber"
+                               class="form-control" placeholder="Телефонен номер" required>
+                    </div>
+
+                    <!-- Снимка -->
+                    <div class="form-group">
+                        <label for="imageUrl">Снимка (URL)</label>
+                        <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" class="text-danger">Грешка</small>
+                        <input type="text" id="imageUrl" th:field="*{imageUrl}" class="form-control" placeholder="https://example.com/image.jpg">
+                    </div>
+
+                    <!-- Бутон -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="thm-btn">Запази промените</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

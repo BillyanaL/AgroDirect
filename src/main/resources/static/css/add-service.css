@@ -1,0 +1,89 @@
+/* Общ контейнер за формата */
+.contact-one {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+}
+
+.sec-title__title {
+    font-size: 36px;
+    font-weight: 600;
+    color: #1a3b2f;
+    margin-bottom: 10px;
+}
+
+.sec-title p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Формата */
+.contact-one__form {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* Полетата */
+.contact-one__form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-one__form label {
+    font-weight: 600;
+    color: #2e3d32;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.contact-one__form input[type="text"],
+.contact-one__form textarea,
+.contact-one__form select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border-color 0.3s;
+}
+
+.contact-one__form input:focus,
+.contact-one__form textarea:focus,
+.contact-one__form select:focus {
+    border-color: #7bb13c;
+    outline: none;
+}
+
+/* Грешки */
+.contact-one__form .text-danger {
+    font-size: 14px;
+    color: #e63946;
+    margin-top: 5px;
+}
+
+/* Бутон */
+.thm-btn {
+    background-color: #7bb13c;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    text-transform: uppercase;
+}
+
+.thm-btn:hover {
+    background-color: #5e942d;
+    cursor: pointer;
+}
+
+.invalid-feedback {
+    display: block !important;
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    /*font-weight: bold;*/
+}
