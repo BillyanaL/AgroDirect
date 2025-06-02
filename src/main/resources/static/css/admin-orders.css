@@ -1,0 +1,48 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.card {
+    border-radius: 12px;
+    border: 1px solid #dee2e6;
+}
+
+.card-header {
+    background-color: #e9ecef;
+    font-size: 16px;
+    font-weight: 500;
+    color: #495057;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.card-body h5 {
+    font-size: 16px;
+    color: #2c3e50;
+    margin-bottom: 12px;
+}
+
+.list-group-item {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    margin-bottom: 4px;
+    border-radius: 6px;
+    padding: 10px 15px;
+    font-size: 14px;
+}
+
+form select {
+    font-size: 14px;
+    padding: 6px;
+}
+
+.btn-primary {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+}

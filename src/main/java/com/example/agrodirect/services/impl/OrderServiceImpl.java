@@ -2,6 +2,8 @@ package com.example.agrodirect.services.impl;
 
 import com.example.agrodirect.models.dtos.AddOrderDTO;
 import com.example.agrodirect.models.dtos.CartItemsViewDTO;
+import com.example.agrodirect.models.dtos.OrderAdminViewDTO;
+import com.example.agrodirect.models.dtos.OrderProductInfoDTO;
 import com.example.agrodirect.models.entities.*;
 import com.example.agrodirect.models.enums.OrderStatus;
 import com.example.agrodirect.repositories.*;
@@ -10,6 +12,7 @@ import com.example.agrodirect.services.OrderService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -158,5 +161,41 @@ public class OrderServiceImpl implements OrderService {
             productRepository.save(product);
         }
     }
+
+    @Override
+    public List<OrderAdminViewDTO> getAllOrdersForAdmin() {
+        return orderRepository.findAll().stream().map(order -> {
+            OrderAdminViewDTO dto = new OrderAdminViewDTO();
+            dto.setOrderId(order.getId());
+            dto.setCustomerName(order.getUser().getFirstName() + " " + order.getUser().getLastName());
+            dto.setOrderDate(order.getOrderDate().atStartOfDay());
+            dto.setTotalSum(BigDecimal.valueOf(order.getTotalPrice()));
+            dto.setOrderStatus(order.getStatus());
+
+            List<OrderProductInfoDTO> products = order.getOrderItems().stream().map(item -> {
+                return new OrderProductInfoDTO(
+                        item.getProduct().getName(),
+                        item.getProduct().getFarmer().getFirstName() + " " + item.getProduct().getFarmer().getLastName(),
+                        item.getQuantity(),
+                        item.getPrice(),
+                        item.getStatus()
+                );
+            }).toList();
+
+            dto.setProducts(products);
+            return dto;
+        }).toList();
+    }
+
+    @Override
+    public void updateOrderStatus(Long orderId, OrderStatus newStatus) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new IllegalArgumentException("Поръчката не е намерена."));
+        order.setStatus(newStatus);
+        orderRepository.save(order);
+    }
+
+
+
 
 }

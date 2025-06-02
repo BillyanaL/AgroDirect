@@ -43,10 +43,18 @@ public class User extends BaseEntity {
     @Column(name = "profile_image_url")
     private String profileImageUrl;
 
+    @Column(name = "enabled")
+    private Boolean enabled;
+
+    @Column(name = "deleted")
+    private Boolean deleted;
+
 
     public User() {
         this.roles = new HashSet<>();
         this.products = new ArrayList<>();
+        this.enabled = false;
+        this.deleted = false;
     }
 
 
@@ -124,5 +132,21 @@ public class User extends BaseEntity {
 
     public void setProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

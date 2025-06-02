@@ -20,4 +20,10 @@ public interface ProductService {
     void update(Long id, UpdateProductDTO updateProductDTO);
 
     List<ProductViewDTO> getFilteredProducts(String keyword, String category, String sort);
+
+    List<ProductViewDTO> getAllProductsForAdmin();
+
+    void toggleProductActiveStatus(Long productId);
+
+    void softDelete(Long id);
 }

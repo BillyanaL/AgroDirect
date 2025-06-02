@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Поръчки - Админ - AgroDirect</title>
+    <link rel="stylesheet" th:href="@{/vendors/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-orders.css}">
+</head>
+<body>
+
+<div class="container py-5">
+    <div class="section-title text-center mb-5">
+        <span class="section-title__tagline">Администрация</span>
+        <h2 class="section-title__title">Управление на поръчки</h2>
+    </div>
+    <h2 class="mb-4 text-center">Всички поръчки</h2>
+
+    <div th:if="${#lists.isEmpty(orders)}" class="text-center text-muted">
+        <p>Няма направени поръчки.</p>
+    </div>
+
+    <div th:if="${successMessage}" class="alert alert-success text-center">
+        <p th:text="${successMessage}"></p>
+    </div>
+
+    <div th:each="order : ${orders}" class="card mb-4 shadow">
+        <div class="card-header bg-light">
+            <strong>Клиент:</strong> <span th:text="${order.customerName}"></span> |
+            <strong>Дата:</strong> <span th:text="${#temporals.format(order.orderDate, 'dd.MM.yyyy')}"></span> |
+            <strong>Обща сума:</strong> <span th:text="${order.totalSum} + ' лв.'"></span>
+        </div>
+
+        <div class="card-body">
+            <h5>Продукти в поръчката:</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item" th:each="product : ${order.products}">
+                    <strong>Продукт:</strong> <span th:text="${product.productName}"></span> |
+                    <strong>Фермер:</strong> <span th:text="${product.farmerName}"></span> |
+                    <strong>Количество:</strong> <span th:text="${product.quantity}"></span> |
+                    <strong>Цена:</strong> <span th:text="${product.price} + ' лв.'"></span> |
+                    <strong>Статус:</strong> <span th:text="${product.status.displayName}"></span>
+                </li>
+            </ul>
+
+            <form th:action="@{/admin/orders/update-status}" method="post" class="d-flex align-items-center gap-2">
+                <input type="hidden" name="orderId" th:value="${order.orderId}"/>
+                <label for="status" class="mb-0"><strong>Промени статус:</strong></label>
+                <select name="newStatus" id="status" class="form-select w-auto" required>
+                    <option th:each="status : ${T(com.example.agrodirect.models.enums.OrderStatus).values()}"
+                            th:value="${status}" th:text="${status.displayName}"
+                            th:selected="${status == order.orderStatus}"></option>
+                </select>
+                <button type="submit" class="btn btn-primary btn-sm">Обнови</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

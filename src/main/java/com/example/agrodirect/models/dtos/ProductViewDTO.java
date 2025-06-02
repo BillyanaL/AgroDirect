@@ -14,6 +14,10 @@ public class ProductViewDTO {
 
     private Double averageRating;
 
+    private Boolean active;
+
+    private String farmerName;
+
     public ProductViewDTO() {
     }
 
@@ -100,5 +104,21 @@ public class ProductViewDTO {
 
     public void setAverageRating(Double averageRating) {
         this.averageRating = averageRating;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public String getFarmerName() {
+        return farmerName;
+    }
+
+    public void setFarmerName(String farmerName) {
+        this.farmerName = farmerName;
     }
 }

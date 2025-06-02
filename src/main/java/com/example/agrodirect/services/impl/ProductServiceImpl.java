@@ -50,6 +50,7 @@ public class ProductServiceImpl implements ProductService {
 
         return productRepository.findAllByFarmer_Id(farmerId)
                 .stream()
+                .filter(p -> !p.getDeleted())
                 .map(this::mapProductToDTO)
                 .toList();
     }
@@ -100,6 +101,31 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductViewDTO> getAllProductsForAdmin() {
+        return productRepository.findAll().stream()
+                .map(this::mapProductToDTO)
+                .toList();
+    }
+
+    @Override
+    public void toggleProductActiveStatus(Long productId) {
+
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("Продуктът не е намерен"));
+
+        product.setActive(!product.getActive());
+        productRepository.save(product);
+
+    }
+
+    public void softDelete(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Продуктът не съществува."));
+        product.setDeleted(true);
+        productRepository.save(product);
+    }
+
+    @Override
     public List<ProductViewDTO> getFilteredProducts(String keyword, String category, String sort) {
         CategoryName categoryName = null;
         if (category != null && !category.isBlank()) {
@@ -113,6 +139,8 @@ public class ProductServiceImpl implements ProductService {
         CategoryName finalCategoryName = categoryName;
 
         List<ProductViewDTO> products = productRepository.findAll().stream()
+                .filter(p -> !p.getDeleted())
+                .filter(p -> p.getActive())
                 .filter(p -> keyword == null || keyword.isBlank() || p.getName().toLowerCase().contains(keyword.toLowerCase()))
                 .filter(p -> finalCategoryName == null || p.getCategory().getName() == finalCategoryName)
                 .map(this::mapProductToDTO)
@@ -144,6 +172,7 @@ public class ProductServiceImpl implements ProductService {
         product.setPrice(dto.getPrice());
         product.setQuantity(dto.getQuantity());
         product.setImageUrl(dto.getImageUrl());
+
     }
 
     private ProductViewDTO mapProductToDTO(Product product){
@@ -155,7 +184,7 @@ public class ProductServiceImpl implements ProductService {
                 .average()
                 .orElse(0.0);
 
-        return new ProductViewDTO(
+        ProductViewDTO dto = new ProductViewDTO(
                 product.getId(),
                 product.getName(),
                 product.getDescription(),
@@ -164,8 +193,12 @@ public class ProductServiceImpl implements ProductService {
                 product.getCategory().getName(),
                 product.getImageUrl(),
                 avgRating
-
         );
+
+        dto.setActive(product.getActive());
+        dto.setFarmerName(product.getFarmer().getFirstName() + " " + product.getFarmer().getLastName());
+
+        return dto;
     }
 
 
@@ -183,6 +216,8 @@ public class ProductServiceImpl implements ProductService {
 
         User currentUser = loggedUserHelperService.get();
         product.setFarmer(currentUser);
+
+        product.setActive(true);
         return product;
     }
 

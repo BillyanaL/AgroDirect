@@ -23,9 +23,20 @@ public class Product extends BaseEntity{
     @Column(name = "image_url",nullable = false)
     private String imageUrl;
 
+    @Column(name = "active", nullable = false)
+    private Boolean active;
+
+    @Column(name = "deleted", nullable = false)
+    private Boolean deleted;
+
     @ManyToOne
     @JoinColumn(name = "farmer_id")
     private User farmer;
+
+    public Product() {
+        this.active = true;
+        this.deleted = false;
+    }
 
     public String getName() {
         return name;
@@ -83,5 +94,21 @@ public class Product extends BaseEntity{
     public Product setFarmer(User farmer) {
         this.farmer = farmer;
         return this;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 }

@@ -1,0 +1,128 @@
+/* Основна стилизация */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+/* Заглавия */
+h2 {
+    color: #2d6a4f;
+    border-bottom: 2px solid #2d6a4f;
+    padding-bottom: 6px;
+    margin-bottom: 25px;
+}
+
+/* Таблици */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+}
+
+thead {
+    background-color: #f0f4f3;
+}
+
+thead th {
+    color: #2d6a4f;
+    padding: 12px;
+    font-size: 15px;
+}
+
+tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Статус активен / блокиран */
+.status-active {
+    color: #198754;
+    font-weight: bold;
+}
+
+.status-blocked {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Бутони */
+button,
+a.btn {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-right: 5px;
+}
+
+button.btn-warning,
+.btn-warning {
+    background-color: #ffc107;
+    border: none;
+    color: #000;
+}
+
+button.btn-danger,
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    color: #fff;
+}
+
+button.btn-info,
+.btn-info {
+    background-color: #0dcaf0;
+    border: none;
+    color: #fff;
+}
+
+button:hover,
+a.btn:hover {
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    table, thead, tbody, tr, td, th {
+        display: block;
+    }
+
+    tr {
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 10px;
+    }
+
+    td {
+        padding: 8px 10px;
+        position: relative;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #2d6a4f;
+        position: absolute;
+        left: 10px;
+        top: 8px;
+    }
+
+    td:last-child {
+        padding-bottom: 12px;
+    }
+}
