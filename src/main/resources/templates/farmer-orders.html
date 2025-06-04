@@ -1,126 +1,85 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Поръчки към мен - AgroDirect</title>-->
-<!--    <link rel="stylesheet" th:href="@{/css/farmer-orders.css}" />-->
-<!--</head>-->
-<!--<body>-->
-<!--<div class="container">-->
-<!--    <h2>Поръчки към вашите продукти</h2>-->
-
-<!--    <div th:each="orderItem : ${farmerOrderItems}" class="order-card">-->
-<!--        <div class="order-header">-->
-<!--            <p><strong>Поръчка №:</strong> <span th:text="${orderItem.order.id}"></span></p>-->
-<!--            <p><strong>Дата на поръчка:</strong> <span th:text="${#temporals.format(orderItem.order.orderDate, 'dd.MM.yyyy')}"></span></p>-->
-<!--            <p><strong>Краен срок за доставка:</strong> <span th:text="${#temporals.format(orderItem.order.deliveryDate, 'dd.MM.yyyy')}"></span></p>-->
-<!--        </div>-->
-
-<!--        <div class="shipping-info">-->
-<!--            <h4>Данни за доставка</h4>-->
-<!--            <p><strong>Име:</strong> <span th:text="${orderItem.order.shippingDetails.firstName} + ' ' + ${orderItem.order.shippingDetails.lastName}"></span></p>-->
-<!--            <p><strong>Адрес:</strong> <span th:text="${orderItem.order.shippingDetails.street} + ' №' + ${orderItem.order.shippingDetails.streetNumber}"></span></p>-->
-<!--            <p><strong>Град:</strong> <span th:text="${orderItem.order.shippingDetails.city}"></span></p>-->
-<!--            <p><strong>Телефон:</strong> <span th:text="${orderItem.order.shippingDetails.phone}"></span></p>-->
-<!--        </div>-->
-
-<!--        <div class="product-details">-->
-<!--            <h4>Продукт</h4>-->
-<!--            <img th:src="@{${orderItem.product.imageUrl}}" alt="Снимка" class="product-img" />-->
-<!--            <p><strong>Име:</strong> <span th:text="${orderItem.product.name}"></span></p>-->
-<!--            <p><strong>Количество:</strong> <span th:text="${orderItem.quantity}"></span></p>-->
-<!--            <p><strong>Цена:</strong> <span th:text="${orderItem.price} + ' лв'"></span></p>-->
-
-<!--            <form th:action="@{/farmer/update-status}" method="post">-->
-<!--                <input type="hidden" name="orderItemId" th:value="${orderItem.id}" />-->
-<!--                <label for="statusSelect">Статус:</label>-->
-<!--                <select name="newStatus" id="statusSelect">-->
-<!--                    <option value="PENDING" th:selected="${orderItem.status == 'PENDING'}">Обработва се</option>-->
-<!--                    <option value="SHIPPED" th:selected="${orderItem.status == 'SHIPPED'}">Изпратена</option>-->
-<!--                    <option value="DELIVERED" th:selected="${orderItem.status == 'DELIVERED'}">Доставена</option>-->
-<!--                    <option value="CANCELLED" th:selected="${orderItem.status == 'CANCELLED'}">Отказана</option>-->
-<!--                </select>-->
-<!--                <button type="submit">Запази</button>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Поръчки към мен - AgroDirect</title>
+    <title>Поръчки към мен | AgroDirect</title>
     <link rel="stylesheet" th:href="@{/css/farmer-orders.css}" />
+
+    <th:block th:replace="fragments/head-links :: headLinks"></th:block>
+    <link rel="stylesheet" href="/vendors/fontawesome/css/all.min.css" />
 </head>
 <body>
-<div class="container">
-    <h2>Поръчки към вашите продукти</h2>
 
-    <div th:if="${successMessage}" class="alert success-alert">
-        <p th:text="${successMessage}"></p>
-    </div>
+<div class="page-wrapper">
 
-    <div th:if="${errorMessage}" class="alert error-alert">
-        <p th:text="${errorMessage}"></p>
-    </div>
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
 
-    <div th:each="orderItem : ${farmerOrderItems}" class="order-card">
+    <div class="container">
+        <h2>Поръчки към вашите продукти</h2>
 
-        <div class="order-header">
-            <p><strong>Поръчка №:</strong> <span th:text="${orderItem.order.id}"></span></p>
-            <p><strong>Дата на поръчка:</strong>
-                <span th:text="${#temporals.format(orderItem.order.orderDate, 'dd.MM.yyyy')}"></span>
-            </p>
-            <p><strong>Краен срок за доставка:</strong>
-                <span th:text="${#temporals.format(orderItem.order.deliveryDate, 'dd.MM.yyyy')}"></span>
-            </p>
+        <div th:if="${successMessage}" class="alert success-alert">
+            <p th:text="${successMessage}"></p>
         </div>
 
-        <div class="shipping-info">
-            <h4>Данни за доставка</h4>
-            <p>
-                <strong>Име:</strong>
-                <span th:text="${orderItem.order.shippingDetails.firstName + ' ' + orderItem.order.shippingDetails.lastName}"></span>
-            </p>
-            <p>
-                <strong>Адрес:</strong>
-                <span th:text="${orderItem.order.shippingDetails.street + ' №' + orderItem.order.shippingDetails.streetNumber}"></span>
-            </p>
-            <p>
-                <strong>Град:</strong> <span th:text="${orderItem.order.shippingDetails.city}"></span>
-            </p>
-            <p>
-                <strong>Телефон:</strong> <span th:text="${orderItem.order.shippingDetails.phone}"></span>
-            </p>
+        <div th:if="${errorMessage}" class="alert error-alert">
+            <p th:text="${errorMessage}"></p>
         </div>
 
-        <div class="product-details">
-            <h4>Продукт</h4>
-            <img th:src="@{${orderItem.product.imageUrl}}" alt="Снимка" class="product-img" />
-            <p><strong>Име:</strong> <span th:text="${orderItem.product.name}"></span></p>
-            <p><strong>Количество:</strong> <span th:text="${orderItem.quantity}"></span></p>
-            <p><strong>Цена:</strong> <span th:text="${orderItem.price} + ' лв'"></span></p>
+        <div th:each="orderItem : ${farmerOrderItems}" class="order-card">
 
-            <!-- Форма за смяна на статус -->
-            <form th:action="@{/farmer/update-status}" method="post" class="status-form">
-                <input type="hidden" name="orderItemId" th:value="${orderItem.id}" />
+            <div class="order-header">
+                <p><strong>Поръчка №:</strong> <span th:text="${orderItem.order.id}"></span></p>
+                <p><strong>Дата на поръчка:</strong>
+                    <span th:text="${#temporals.format(orderItem.order.orderDate, 'dd.MM.yyyy')}"></span>
+                </p>
+                <p><strong>Краен срок за доставка:</strong>
+                    <span th:text="${#temporals.format(orderItem.order.deliveryDate, 'dd.MM.yyyy')}"></span>
+                </p>
+            </div>
 
-                <label for="statusSelect">Статус:</label>
-                <select name="status" id="statusSelect">
-                    <option value="PENDING" th:selected="${orderItem.status.name() == 'PENDING'}">Обработва се</option>
-                    <option value="ACCEPTED" th:selected="${orderItem.status == 'ACCEPTED'}">Приета</option>
-                    <option value="SHIPPED" th:selected="${orderItem.status.name() == 'SHIPPED'}">Изпратена</option>
-                    <option value="DELIVERED" th:selected="${orderItem.status.name() == 'DELIVERED'}">Доставена</option>
-                    <option value="CANCELLED" th:selected="${orderItem.status.name() == 'CANCELLED'}">Отказана</option>
-                </select>
+            <div class="shipping-info">
+                <h4>Данни за доставка</h4>
+                <p>
+                    <strong>Име:</strong>
+                    <span th:text="${orderItem.order.shippingDetails.firstName + ' ' + orderItem.order.shippingDetails.lastName}"></span>
+                </p>
+                <p>
+                    <strong>Адрес:</strong>
+                    <span th:text="${orderItem.order.shippingDetails.street + ' №' + orderItem.order.shippingDetails.streetNumber}"></span>
+                </p>
+                <p>
+                    <strong>Град:</strong> <span th:text="${orderItem.order.shippingDetails.city}"></span>
+                </p>
+                <p>
+                    <strong>Телефон:</strong> <span th:text="${orderItem.order.shippingDetails.phone}"></span>
+                </p>
+            </div>
 
-                <button type="submit">Запази</button>
-            </form>
+            <div class="product-details">
+                <h4>Продукт</h4>
+                <img th:src="@{${orderItem.product.imageUrl}}" alt="Снимка" class="product-img" />
+                <p><strong>Име:</strong> <span th:text="${orderItem.product.name}"></span></p>
+                <p><strong>Количество:</strong> <span th:text="${orderItem.quantity}"></span></p>
+                <p><strong>Цена:</strong> <span th:text="${orderItem.price} + ' лв'"></span></p>
+
+                <!-- Форма за смяна на статус -->
+                <form th:action="@{/farmer/update-status}" method="post" class="status-form">
+                    <input type="hidden" name="orderItemId" th:value="${orderItem.id}" />
+
+                    <label for="statusSelect">Статус:</label>
+                    <select name="status" id="statusSelect">
+                        <option value="PENDING" th:selected="${orderItem.status.name() == 'PENDING'}">Обработва се</option>
+                        <option value="ACCEPTED" th:selected="${orderItem.status == 'ACCEPTED'}">Приета</option>
+                        <option value="SHIPPED" th:selected="${orderItem.status.name() == 'SHIPPED'}">Изпратена</option>
+                        <option value="DELIVERED" th:selected="${orderItem.status.name() == 'DELIVERED'}">Доставена</option>
+                        <option value="CANCELLED" th:selected="${orderItem.status.name() == 'CANCELLED'}">Отказана</option>
+                    </select>
+
+                    <button type="submit">Запази</button>
+                </form>
+            </div>
         </div>
     </div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
 </div>
 </body>
 </html>

@@ -1,50 +1,61 @@
 <!DOCTYPE html>
 <html lang="bg" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Профил на фермер</title>
+    <title>Профил на фермер | AgroDirect</title>
     <link rel="stylesheet" href="/css/farmer-profile.css">
+
+    <th:block th:replace="fragments/head-links :: headLinks"></th:block>
+    <link rel="stylesheet" href="/vendors/fontawesome/css/all.min.css" />
 </head>
 <body>
-<div class="container">
-    <p class="success-message" th:if="${successMessage}" th:text="${successMessage}"></p>
 
-    <form th:action="@{/profile/update}" th:object="${farmerProfileDTO}" method="post">
-        <div class="profile-container">
-            <div class="profile-image">
-                <img th:src="*{profileImageUrl}" alt="Profile Image"/>
-                <input type="text" th:field="*{profileImageUrl}" id="profile-image-url" placeholder="Въведете URL на снимка" required/>
-                <span th:if="${#fields.hasErrors('profileImageUrl')}" th:errors="*{profileImageUrl}" class="error"></span>
+<div class="page-wrapper">
+
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
+
+
+    <div class="container">
+        <p class="success-message" th:if="${successMessage}" th:text="${successMessage}"></p>
+
+        <form th:action="@{/profile/update}" th:object="${farmerProfileDTO}" method="post">
+            <div class="profile-container">
+                <div class="profile-image">
+                    <img th:src="*{profileImageUrl}" alt="Profile Image"/>
+                    <input type="text" th:field="*{profileImageUrl}" id="profile-image-url" placeholder="Въведете URL на снимка" required/>
+                    <span th:if="${#fields.hasErrors('profileImageUrl')}" th:errors="*{profileImageUrl}" class="error"></span>
+                </div>
+                <div class="profile-info">
+                    <h2>Настройки на профила</h2>
+                    <div class="form-group">
+                        <label for="first-name">Име</label>
+                        <input type="text" id="first-name" th:field="*{firstName}" required/>
+                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Фамилия</label>
+                        <input type="text" id="last-name" th:field="*{lastName}" required/>
+                        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Локация</label>
+                        <input type="text" id="location" th:field="*{location}" required/>
+                        <span th:if="${#fields.hasErrors('location')}" th:errors="*{location}" class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="bio">Допълнителни детайли</label>
+                        <textarea id="bio" th:field="*{bio}" rows="4"></textarea>
+                        <span th:if="${#fields.hasErrors('bio')}" th:errors="*{bio}" class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Запази промените</button>
+                    </div>
+                </div>
             </div>
-            <div class="profile-info">
-                <h2>Настройки на профила</h2>
-                <div class="form-group">
-                    <label for="first-name">Име</label>
-                    <input type="text" id="first-name" th:field="*{firstName}" required/>
-                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error"></span>
-                </div>
-                <div class="form-group">
-                    <label for="last-name">Фамилия</label>
-                    <input type="text" id="last-name" th:field="*{lastName}" required/>
-                    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error"></span>
-                </div>
-                <div class="form-group">
-                    <label for="location">Локация</label>
-                    <input type="text" id="location" th:field="*{location}" required/>
-                    <span th:if="${#fields.hasErrors('location')}" th:errors="*{location}" class="error"></span>
-                </div>
-                <div class="form-group">
-                    <label for="bio">Допълнителни детайли</label>
-                    <textarea id="bio" th:field="*{bio}" rows="4"></textarea>
-                    <span th:if="${#fields.hasErrors('bio')}" th:errors="*{bio}" class="error"></span>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn">Запази промените</button>
-                </div>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
 </div>
 </body>
 </html>

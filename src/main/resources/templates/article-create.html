@@ -1,62 +1,70 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Създай статия - AgroDirect</title>
+    <title>Създай статия | AgroDirect</title>
     <link rel="stylesheet" th:href="@{/css/article-create.css}">
     <link rel="stylesheet" th:href="@{/vendors/bootstrap/css/bootstrap.min.css}">
+
+    <th:block th:replace="fragments/head-links :: headLinks"></th:block>
+    <link rel="stylesheet" href="/vendors/fontawesome/css/all.min.css" />
 
 </head>
 <body>
 
-<!-- Стандартен контейнер -->
-<section class="contact-page">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xl-8 col-lg-9">
-                <div class="contact-page__form-box">
-                    <div class="section-title text-center">
-                        <span class="section-title__tagline">Образователна секция</span>
-                        <h2 class="section-title__title">Създай статия</h2>
-                    </div>
+<div class="page-wrapper">
 
-                    <form th:action="@{/farmer/article/add}" th:object="${addArticleDTO}" method="post" class="contact-page__form">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label for="title">Заглавие</label>
-                                <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:class="invalid-feedback"></small>
-                                <input type="text" id="title" th:field="*{title}" class="form-control"  placeholder="Въведи заглавие">
-                            </div>
-
-                            <div class="col-md-12 mt-3">
-                                <label for="imageUrl">URL на снимка</label>
-                                <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" th:class="'invalid-feedback rounded'"></small>
-                                <input type="text" id="imageUrl" th:field="*{imageUrl}" class="form-control" placeholder="http://example.com/image.jpg">
-                            </div>
-
-                            <div class="col-md-12 mt-3">
-                                <label for="content">Съдържание</label>
-                                <small th:if="${#fields.hasErrors('content')}" th:errors="*{content}" th:class="'invalid-feedback rounded'"></small>
-                                <textarea id="content" th:field="*{content}" rows="8" class="form-control" placeholder="Текст на статията..."></textarea>
-                            </div>
-
-                            <div class="col-md-12 text-center mt-4">
-                                <button type="submit" class="btn btn-primary">Публикувай</button>
-                            </div>
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
+    <!-- Стандартен контейнер -->
+    <section class="contact-page">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-9">
+                    <div class="contact-page__form-box">
+                        <div class="section-title text-center">
+                            <span class="section-title__tagline">Образователна секция</span>
+                            <h2>Създай статия</h2>
                         </div>
-                    </form>
 
-                    <!-- Успешно съобщение -->
-                    <div th:if="${successMessage}" class="alert alert-success mt-3" th:text="${successMessage}"></div>
+                        <form th:action="@{/farmer/article/add}" th:object="${addArticleDTO}" method="post" class="contact-page__form">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="title">Заглавие</label>
+                                    <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:class="invalid-feedback"></small>
+                                    <input type="text" id="title" th:field="*{title}" class="form-control"  placeholder="Въведи заглавие">
+                                </div>
 
-                    <!-- Грешка -->
-                    <div th:if="${errorMessage}" class="alert alert-danger mt-3" th:text="${errorMessage}"></div>
+                                <div class="col-md-12 mt-3">
+                                    <label for="imageUrl">URL на снимка</label>
+                                    <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" th:class="'invalid-feedback rounded'"></small>
+                                    <input type="text" id="imageUrl" th:field="*{imageUrl}" class="form-control" placeholder="http://example.com/image.jpg">
+                                </div>
 
+                                <div class="col-md-12 mt-3">
+                                    <label for="content">Съдържание</label>
+                                    <small th:if="${#fields.hasErrors('content')}" th:errors="*{content}" th:class="'invalid-feedback rounded'"></small>
+                                    <textarea id="content" th:field="*{content}" rows="8" class="form-control" placeholder="Текст на статията..."></textarea>
+                                </div>
+
+                                <div class="col-md-12 text-center mt-4">
+                                    <button type="submit" class="btn btn-primary">Публикувай</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Успешно съобщение -->
+                        <div th:if="${successMessage}" class="alert alert-success mt-3" th:text="${successMessage}"></div>
+
+                        <!-- Грешка -->
+                        <div th:if="${errorMessage}" class="alert alert-danger mt-3" th:text="${errorMessage}"></div>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
 
 </body>
 </html>

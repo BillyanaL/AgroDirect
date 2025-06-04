@@ -3,6 +3,7 @@ package com.example.agrodirect.services;
 import com.example.agrodirect.models.dtos.AddProductDTO;
 import com.example.agrodirect.models.dtos.ProductViewDTO;
 import com.example.agrodirect.models.dtos.UpdateProductDTO;
+import com.example.agrodirect.models.entities.Product;
 
 import java.util.List;
 
@@ -10,6 +11,8 @@ public interface ProductService {
 
     void add(AddProductDTO addProductDTO);
     List<ProductViewDTO> getAll();
+    ProductViewDTO mapProductToDTO(Product product);
+
 
     void deleteProduct(Long id);
 

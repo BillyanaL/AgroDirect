@@ -27,6 +27,7 @@ public interface ArticleService {
     List<ArticleViewDTO> getAllApprovedArticles();
 
 
+    List<ArticleViewDTO> getLatestTwoApprovedArticles();
 
 
 

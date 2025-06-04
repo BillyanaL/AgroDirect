@@ -1,0 +1,28 @@
+<div th:fragment="siteHeader">
+    <header class="main-header">
+        <div class="main-header__wrapper">
+            <div class="main-header__wrapper-inner">
+                <div class="main-header__logo">
+                    <a th:href="@{/}"><img src="/images/resources/logo-1.png" alt=""></a>
+                </div>
+                <div class="main-header__menu-box">
+                    <div class="main-header__menu-box-bottom">
+                        <div th:replace="~{fragments/main-nav :: navigation}"></div>
+                    </div>
+                </div>
+                <div class="main-header__phone-contact-box">
+                    <div class="main-header__phone-number">
+                        <a href="tel:9200886823">+92 (0088) 6823</a>
+                    </div>
+                    <div class="main-header__call-box">
+                        <div class="main-header__call-inner">
+                            <div class="main-header__call-icon">
+                                <span class="fas fa-phone"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>

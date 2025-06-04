@@ -171,6 +171,13 @@ public class ArticleServiceImpl implements ArticleService {
                 .toList();
     }
 
+    @Override
+    public List<ArticleViewDTO> getLatestTwoApprovedArticles() {
+        return articleRepository.findTop2ByApprovedTrueOrderByCreatedOnDesc()
+                .stream()
+                .map(this::mapToArticleViewDTO)
+                .toList();
+    }
 
 
 

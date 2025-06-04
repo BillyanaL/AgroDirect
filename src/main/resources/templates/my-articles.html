@@ -1,62 +1,71 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Моите статии - AgroDirect</title>
+    <title>Моите статии | AgroDirect</title>
     <link rel="stylesheet" th:href="@{/vendors/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/my-articles.css}">
+
+    <th:block th:replace="fragments/head-links :: headLinks"></th:block>
+    <link rel="stylesheet" href="/vendors/fontawesome/css/all.min.css" />
 </head>
 <body>
 
-<section class="blog-page pt-5 pb-5">
-    <div class="container">
-        <div class="section-title text-center mb-5">
-            <span class="section-title__tagline">Образователна секция</span>
-            <h2 class="section-title__title">Моите статии</h2>
-        </div>
+<div class="page-wrapper">
 
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
+
+
+    <section class="blog-page pt-5 pb-5">
         <div class="container">
-            <div class="row" th:if="${#lists.isEmpty(myArticles)}">
-                <div class="col text-center">
-                    <p class="text-muted">Все още нямате създадени статии.</p>
-                </div>
+            <div class="section-title text-center mb-5">
+                <span class="section-title__tagline">Образователна секция</span>
+                <h2>Моите статии</h2>
             </div>
 
-            <div class="row" th:if="${!#lists.isEmpty(myArticles)}">
-                <div class="col-md-6 col-lg-4 mb-4" th:each="article : ${myArticles}">
-                    <div class="card h-100 shadow-sm">
-                        <img th:src="@{${article.imageUrl}}" class="card-img-top" th:alt="${article.title}">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title" th:text="${article.title}">Заглавие</h5>
-                            <p class="card-text small" th:text="${#strings.abbreviate(article.content, 120)}"></p>
-                            <p class="text-muted small mt-auto">
-                                Статус: <span th:text="${article.approved ? 'Одобрена' : 'Чака одобрение'}"></span>
-                            </p>
+            <div class="container">
+                <div class="row" th:if="${#lists.isEmpty(myArticles)}">
+                    <div class="col text-center">
+                        <p class="text-muted">Все още нямате създадени статии.</p>
+                    </div>
+                </div>
 
-                            <div class="d-flex w-100 px-2 gap-4 mt-2">
-                                <a th:href="@{'/farmer/articles/edit/' + ${article.id}}"
-                                   class="btn btn-warning btn-sm text-center w-100">Редактирай</a>
+                <div class="row" th:if="${!#lists.isEmpty(myArticles)}">
+                    <div class="col-md-6 col-lg-4 mb-4" th:each="article : ${myArticles}">
+                        <div class="card h-100 shadow-sm">
+                            <img th:src="@{${article.imageUrl}}" class="card-img-top" th:alt="${article.title}">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title" th:text="${article.title}">Заглавие</h5>
+                                <p class="card-text small" th:text="${#strings.abbreviate(article.content, 120)}"></p>
+                                <p class="text-muted small mt-auto">
+                                    Статус: <span th:text="${article.approved ? 'Одобрена' : 'Чака одобрение'}"></span>
+                                </p>
 
-                                <form th:action="@{'/farmer/articles/delete/' + ${article.id}}"
-                                      method="post" class="w-100" style="display: inline;">
-                                    <button type="submit"
-                                            class="btn btn-danger btn-sm w-100 text-center"
-                                            onclick="return confirm('Наистина ли искате да изтриете тази статия?')">
-                                        Изтрий
-                                    </button>
-                                </form>
+                                <div class="d-flex w-100 px-2 gap-4 mt-2">
+                                    <a th:href="@{'/farmer/articles/edit/' + ${article.id}}"
+                                       class="btn btn-warning btn-sm text-center w-100">Редактирай</a>
+
+                                    <form th:action="@{'/farmer/articles/delete/' + ${article.id}}"
+                                          method="post" class="w-100" style="display: inline;">
+                                        <button type="submit"
+                                                class="btn btn-danger btn-sm w-100 text-center"
+                                                onclick="return confirm('Наистина ли искате да изтриете тази статия?')">
+                                            Изтрий
+                                        </button>
+                                    </form>
+                                </div>
+
+
                             </div>
-
-
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
-
-
-    </div>
-</section>
+    </section>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
 
 </body>
 </html>

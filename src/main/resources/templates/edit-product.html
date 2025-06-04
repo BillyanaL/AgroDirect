@@ -2,65 +2,77 @@
 <html lang="bg" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Редактирай продукт</title>
+    <title>Редактирай продукт | AgroDirect</title>
     <link rel="stylesheet" href="/css/add-product.css">
+
+    <th:block th:replace="fragments/head-links :: headLinks"></th:block>
+    <link rel="stylesheet" href="/vendors/fontawesome/css/all.min.css" />
 </head>
 <body>
-<section class="add-product-section">
-    <div class="container">
 
-        <form th:action="@{/farmer/products/edit/{id}(id=${productId})}"
-              th:object="${updateProductDTO}"
-              method="post"
-              class="add-product-form">
+<div class="page-wrapper">
 
-            <h2 class="section-title">Редактирай продукт</h2>
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
 
-            <div class="form-group">
-                <label for="name">Име:</label>
-                <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="'invalid-feedback rounded'"></small>
-                <input type="text" id="name" th:field="*{name}" required>
-            </div>
+    <section class="add-product-section">
+        <div class="container">
 
-            <div class="form-group">
-                <label for="description">Описание:</label>
-                <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:class="'invalid-feedback rounded'"></small>
-                <textarea id="description" th:field="*{description}" required></textarea>
-            </div>
+            <form th:action="@{/farmer/products/edit/{id}(id=${productId})}"
+                  th:object="${updateProductDTO}"
+                  method="post"
+                  class="add-product-form">
 
-            <div class="form-group">
-                <label for="price">Цена (лв):</label>
-                <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}" th:class="'invalid-feedback rounded'"></small>
-                <input type="number" step="0.01" id="price" th:field="*{price}" required>
-            </div>
+                <h2 class="section-title">Редактирай продукт</h2>
 
-            <div class="form-group">
-                <label for="quantity">Количество:</label>
-                <small th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" th:class="'invalid-feedback rounded'"></small>
-                <input type="number" id="quantity" th:field="*{quantity}" required>
-            </div>
+                <div class="form-group">
+                    <label for="name">Име:</label>
+                    <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="'invalid-feedback rounded'"></small>
+                    <input type="text" id="name" th:field="*{name}" required>
+                </div>
 
-            <div class="form-group">
-                <label for="category">Категория:</label>
-                <small th:if="${#fields.hasErrors('category')}" th:errors="*{category}" th:class="'invalid-feedback rounded'"></small>
-                <select id="category" th:field="*{category}" required>
-                    <option value="" disabled>Избери категория</option>
-                    <option th:each="cat : ${T(com.example.agrodirect.models.enums.CategoryName).values()}"
-                            th:value="${cat}" th:text="${cat}">
-                    </option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="description">Описание:</label>
+                    <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:class="'invalid-feedback rounded'"></small>
+                    <textarea id="description" th:field="*{description}" required></textarea>
+                </div>
 
-            <div class="form-group">
-                <label for="imageUrl">Линк към снимка:</label>
-                <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" th:class="'invalid-feedback rounded'"></small>
-                <input type="url" id="imageUrl" th:field="*{imageUrl}" required>
-            </div>
+                <div class="form-group">
+                    <label for="price">Цена (лв):</label>
+                    <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}" th:class="'invalid-feedback rounded'"></small>
+                    <input type="number" step="0.01" id="price" th:field="*{price}" required>
+                </div>
 
-            <button type="submit" class="submit-btn">Запази промените</button>
-        </form>
+                <div class="form-group">
+                    <label for="quantity">Количество:</label>
+                    <small th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" th:class="'invalid-feedback rounded'"></small>
+                    <input type="number" id="quantity" th:field="*{quantity}" required>
+                </div>
 
-    </div>
-</section>
+                <div class="form-group">
+                    <label for="category">Категория:</label>
+                    <small th:if="${#fields.hasErrors('category')}" th:errors="*{category}" th:class="'invalid-feedback rounded'"></small>
+                    <select id="category" th:field="*{category}" required>
+                        <option value="" disabled>Избери категория</option>
+                        <option th:each="cat : ${T(com.example.agrodirect.models.enums.CategoryName).values()}"
+                                th:value="${cat}" th:text="${cat}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="imageUrl">Линк към снимка:</label>
+                    <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" th:class="'invalid-feedback rounded'"></small>
+                    <input type="url" id="imageUrl" th:field="*{imageUrl}" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Запази промените</button>
+            </form>
+
+        </div>
+    </section>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+</div>
 </body>
 </html>

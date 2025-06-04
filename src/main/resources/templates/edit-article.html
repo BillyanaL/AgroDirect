@@ -2,64 +2,75 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
-    <title>Редактирай статия - AgroDirect</title>
+    <title>Редактирай статия | AgroDirect</title>
     <link rel="stylesheet" th:href="@{/vendors/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/article-create.css}">
+
+    <th:block th:replace="fragments/head-links :: headLinks"></th:block>
+    <link rel="stylesheet" href="/vendors/fontawesome/css/all.min.css" />
 </head>
 <body>
 
-<section class="contact-page">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xl-8 col-lg-9">
-                <div class="contact-page__form-box">
-                    <div class="section-title text-center">
-                        <span class="section-title__tagline">Образователна секция</span>
-                        <h2 class="section-title__title">Редактирай статия</h2>
-                    </div>
 
-                    <form th:action="@{/farmer/articles/edit/{id}(id=${editArticleDTO.id})}"
-                          th:object="${editArticleDTO}"
-                          method="post"
-                          class="contact-page__form">
+<div class="page-wrapper">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label for="title">Заглавие</label>
-                                <input type="text" id="title" th:field="*{title}" class="form-control">
-                                <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
-                                       th:class="'invalid-feedback rounded'"></small>
-                            </div>
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
 
-                            <div class="col-md-12 mt-3">
-                                <label for="imageUrl">URL на снимка</label>
-                                <input type="text" id="imageUrl" th:field="*{imageUrl}" class="form-control">
-                                <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"
-                                       th:class="'invalid-feedback rounded'"></small>
-                            </div>
-
-                            <div class="col-md-12 mt-3">
-                                <label for="content">Съдържание</label>
-                                <textarea id="content" th:field="*{content}" rows="8" class="form-control"></textarea>
-                                <small th:if="${#fields.hasErrors('content')}" th:errors="*{content}"
-                                       th:class="'invalid-feedback rounded'"></small>
-                            </div>
-
-                            <div class="col-md-12 text-center mt-4">
-                                <button type="submit" class="btn btn-primary">Запази промените</button>
-                            </div>
+    <section class="contact-page">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-9">
+                    <div class="contact-page__form-box">
+                        <div class="section-title text-center">
+                            <span class="section-title__tagline">Образователна секция</span>
+                            <h2 class="section-title__title">Редактирай статия</h2>
                         </div>
-                    </form>
 
-                    <div th:if="${successMessage}" class="alert alert-success mt-3" th:text="${successMessage}"></div>
-                    <div th:if="${errorMessage}" class="alert alert-danger mt-3" th:text="${errorMessage}"></div>
+                        <form th:action="@{/farmer/articles/edit/{id}(id=${editArticleDTO.id})}"
+                              th:object="${editArticleDTO}"
+                              method="post"
+                              class="contact-page__form">
 
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="title">Заглавие</label>
+                                    <input type="text" id="title" th:field="*{title}" class="form-control">
+                                    <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
+                                           th:class="'invalid-feedback rounded'"></small>
+                                </div>
+
+                                <div class="col-md-12 mt-3">
+                                    <label for="imageUrl">URL на снимка</label>
+                                    <input type="text" id="imageUrl" th:field="*{imageUrl}" class="form-control">
+                                    <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"
+                                           th:class="'invalid-feedback rounded'"></small>
+                                </div>
+
+                                <div class="col-md-12 mt-3">
+                                    <label for="content">Съдържание</label>
+                                    <textarea id="content" th:field="*{content}" rows="8" class="form-control"></textarea>
+                                    <small th:if="${#fields.hasErrors('content')}" th:errors="*{content}"
+                                           th:class="'invalid-feedback rounded'"></small>
+                                </div>
+
+                                <div class="col-md-12 text-center mt-4">
+                                    <button type="submit" class="btn btn-primary">Запази промените</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div th:if="${successMessage}" class="alert alert-success mt-3" th:text="${successMessage}"></div>
+                        <div th:if="${errorMessage}" class="alert alert-danger mt-3" th:text="${errorMessage}"></div>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+</div>
 
 </body>
 </html>

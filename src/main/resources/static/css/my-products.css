@@ -4,7 +4,7 @@ body {
     background: url('../images/beautiful-blur.png') no-repeat center center fixed;
     background-size: cover;
     margin: 0;
-    padding: 20px;
+    padding: 0px;
 }
 
 .container {
@@ -20,6 +20,7 @@ body {
     margin-bottom: 30px;
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
+    padding-top: 50px;
 }
 
 .product-grid {
@@ -108,5 +109,9 @@ body {
     padding: 12px 20px;
     border-radius: 10px;
     /*box-shadow: 0 0 10px rgba(211, 47, 47, 0.2);*/
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Segoe UI', sans-serif !important;
 }
 

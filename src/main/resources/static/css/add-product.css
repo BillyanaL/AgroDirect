@@ -3,8 +3,8 @@ body {
     background: url('../images/garden.jpg') no-repeat center center fixed;
     background-size: cover;
     font-family: 'Segoe UI', Arial, sans-serif;
-    color: #333;  /* основен цвят на текста */
-    margin: 0;    /* нулиране на външните отстояния на body */
+    color: #333;
+    margin: 0;
 }
 
 /* Контейнер на формата за добавяне на продукт */
@@ -97,3 +97,6 @@ select:hover {
     font-weight: bold;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Segoe UI', sans-serif !important;
+}

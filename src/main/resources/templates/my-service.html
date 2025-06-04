@@ -1,59 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Моите услуги | AgroDirect</title>
     <link rel="stylesheet" th:href="@{/vendors/bootstrap/css/bootstrap.min.css}" />
-    <link rel="stylesheet" th:href="@{/css/my-services.css}" />
+    <link rel="stylesheet" th:href="@{/css/my-service.css}" />
+
+    <th:block th:replace="fragments/head-links :: headLinks"></th:block>
+    <link rel="stylesheet" href="/vendors/fontawesome/css/all.min.css" />
 </head>
 <body>
 
-<section class="container mt-5">
-    <h2 class="mb-4 text-center">Моите услуги</h2>
+<div class="page-wrapper">
 
-    <div th:if="${successMessage}" class="alert alert-success text-center" th:text="${successMessage}"></div>
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
 
-    <div th:if="${services.isEmpty()}">
-        <p class="text-center">Нямате добавени услуги.</p>
-    </div>
+    <section class="container mt-5">
+        <h2 class="mb-4 text-center">Моите услуги</h2>
 
-    <!-- Карта на всяка услуга -->
-    <div th:each="service : ${services}" class="card mb-4 shadow-sm">
-        <div class="row g-0">
-            <!-- Лява колона: Снимка -->
-            <div class="col-md-4">
-                <img th:src="@{${service.imageUrl}}" class="img-fluid rounded-start h-100 object-fit-cover"  alt="Снимка на услуга">
-            </div>
+        <div th:if="${successMessage}" class="alert alert-success text-center" th:text="${successMessage}"></div>
 
-            <!-- Дясна колона: информация и бутони -->
-            <div class="col-md-8">
-                <div class="card-body d-flex flex-column justify-content-between h-100">
-                    <div>
-                        <h5 class="card-title" th:text="${service.title}">Заглавие</h5>
-                        <p class="card-text"><strong>Категория:</strong> <span th:text="${service.category.displayName}"></span></p>
-                        <p class="card-text"><strong>Описание:</strong> <span th:text="${#strings.abbreviate(service.description, 120)}"></span></p>
-                        <p class="card-text"><strong>Телефон:</strong> <span th:text="${service.phoneNumber}"></span></p>
-                        <p class="card-text">
-                            <strong>Статус:</strong>
-                            <span th:classappend="${service.approved} ? 'badge bg-success' : 'badge bg-warning text-dark'"
-                                  th:text="${service.approved} ? 'Одобрена' : 'Чака одобрение'">Статус</span>
-                        </p>
-                    </div>
+        <div th:if="${services.isEmpty()}">
+            <p class="text-center">Нямате добавени услуги.</p>
+        </div>
 
-                    <div class="mt-3">
-                        <a th:href="@{'/farmer/service/edit/' + ${service.id}}" class="btn btn-outline-primary btn-sm me-2">✏️ Редактирай</a>
-                        <form th:action="@{'/farmer/service/delete/' + ${service.id}}" method="post"
-                              onsubmit="return confirm('Сигурни ли сте, че искате да изтриете тази услуга?');"
-                              style="display:inline;">
-                            <button type="submit" class="btn btn-outline-danger btn-sm">🗑️ Изтрий</button>
-                        </form>
+        <!-- Карта на всяка услуга -->
+        <div th:each="service : ${services}" class="card mb-4 shadow-sm">
+            <div class="row g-0">
+                <!-- Лява колона: Снимка -->
+                <div class="col-md-4">
+                    <img th:src="@{${service.imageUrl}}" class="img-fluid rounded-start h-100 object-fit-cover"  alt="Снимка на услуга">
+                </div>
 
+                <!-- Дясна колона: информация и бутони -->
+                <div class="col-md-8">
+                    <div class="card-body d-flex flex-column justify-content-between h-100">
+                        <div>
+                            <h5 class="card-title" th:text="${service.title}">Заглавие</h5>
+                            <p class="card-text"><strong>Категория:</strong> <span th:text="${service.category.displayName}"></span></p>
+                            <p class="card-text"><strong>Описание:</strong> <span th:text="${#strings.abbreviate(service.description, 120)}"></span></p>
+                            <p class="card-text"><strong>Телефон:</strong> <span th:text="${service.phoneNumber}"></span></p>
+                            <p class="card-text">
+                                <strong>Статус:</strong>
+                                <span th:classappend="${service.approved} ? 'badge bg-success' : 'badge bg-warning text-dark'"
+                                      th:text="${service.approved} ? 'Одобрена' : 'Чака одобрение'">Статус</span>
+                            </p>
+                        </div>
+
+                        <div class="mt-3">
+                            <a th:href="@{'/farmer/service/edit/' + ${service.id}}" class="btn btn-outline-primary btn-sm me-2">✏️ Редактирай</a>
+                            <form th:action="@{'/farmer/service/delete/' + ${service.id}}" method="post"
+                                  onsubmit="return confirm('Сигурни ли сте, че искате да изтриете тази услуга?');"
+                                  style="display:inline;">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">🗑️ Изтрий</button>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
 
 </body>
 </html>

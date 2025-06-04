@@ -392,6 +392,7 @@ ul {
   color: var(--agrion-base);
   font-weight: 500;
   z-index: 1;
+  margin-top: 50px;
 }
 
 .section-title__title {
@@ -3580,6 +3581,9 @@ ul {
 .healthy-food-one__img img {
   width: 100%;
   border-radius: var(--agrion-bdr-radius);
+  height: 600px;
+  object-fit: cover;
+
 }
 
 .healthy-food-one__right {
@@ -5742,7 +5746,7 @@ ul {
   display: block;
   float: left;
   width: 50%;
-  min-height: 705px;
+  min-height: 852px;
 }
 
 .Provide-One__bg {
@@ -11999,6 +12003,8 @@ ul {
 .about-three__left-img img {
   width: 100%;
   border-radius: var(--agrion-bdr-radius);
+  height: 300px;
+  object-fit: cover;
 }
 
 .about-three__left-img--2 {

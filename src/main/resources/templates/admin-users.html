@@ -1,92 +1,103 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Управление на потребители – Админ – AgroDirect</title>
+    <title>Управление на потребители | Админ | AgroDirect</title>
 
     <!-- Стилове на AgroDirect -->
     <link rel="stylesheet" th:href="@{/vendors/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/admin-users.css}">
+
+    <th:block th:replace="fragments/head-links :: headLinks"></th:block>
+    <link rel="stylesheet" href="/vendors/fontawesome/css/all.min.css" />
 </head>
 <body>
 
-<div class="container mt-5 mb-5">
-    <div class="section-title text-center mb-5">
-        <span class="section-title__tagline">Администрация</span>
-        <h2 class="section-title__title">Управление на потребители</h2>
+
+<div class="page-wrapper">
+
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
+
+    <div class="container mt-5 mb-5">
+        <div class="section-title text-center mb-5">
+            <span class="section-title__tagline">Администрация</span>
+            <h2>Управление на потребители</h2>
+        </div>
+
+        <h2>Фермери</h2>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Име</th>
+                <th>Имейл</th>
+                <th>Роля</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="farmer : ${farmers}">
+                <td th:text="${farmer.fullName}"></td>
+                <td th:text="${farmer.email}"></td>
+                <td th:text="${farmer.role}"></td>
+                <td th:text="${farmer.enabled ? 'Активен' : 'Блокиран'}"
+                    th:class="${farmer.enabled ? 'status-active' : 'status-blocked'}"></td>
+                <td>
+                    <form th:action="@{/admin/users/toggle-status}" method="post" style="display:inline-block;">
+                        <input type="hidden" name="userId" th:value="${farmer.id}"/>
+                        <button class="btn btn-warning btn-sm"
+                                th:text="${farmer.enabled ? 'Деактивирай' : 'Активирай'}"></button>
+                    </form>
+
+                    <form th:action="@{/admin/users/delete}" method="post" style="display:inline-block;">
+                        <input type="hidden" name="userId" th:value="${farmer.id}"/>
+                        <button class="btn btn-danger btn-sm"
+                                onclick="return confirm('Сигурни ли сте, че искате да изтриете този потребител?');">Изтрий</button>
+                    </form>
+
+                    <a th:href="@{/farmers/details/{id}(id=${farmer.id})}" class="btn btn-info btn-sm">Преглед профил</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2 class="mt-5">Обикновени потребители</h2>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Име</th>
+                <th>Имейл</th>
+                <th>Роля</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${customers}">
+                <td th:text="${user.fullName}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.role}"></td>
+                <td th:text="${user.enabled ? 'Активен' : 'Блокиран'}"
+                    th:class="${user.enabled ? 'status-active' : 'status-blocked'}"></td>
+                <td>
+                    <form th:action="@{/admin/users/toggle-status}" method="post" style="display:inline-block;">
+                        <input type="hidden" name="userId" th:value="${user.id}"/>
+                        <button class="btn btn-warning btn-sm"
+                                th:text="${user.enabled ? 'Деактивирай' : 'Активирай'}"></button>
+                    </form>
+
+                    <form th:action="@{/admin/users/delete}" method="post" style="display:inline-block;">
+                        <input type="hidden" name="userId" th:value="${user.id}"/>
+                        <button class="btn btn-danger btn-sm"
+                                onclick="return confirm('Сигурни ли сте, че искате да изтриете този потребител?');">Изтрий</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
 
-    <h2>Фермери</h2>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Име</th>
-            <th>Имейл</th>
-            <th>Роля</th>
-            <th>Статус</th>
-            <th>Действия</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="farmer : ${farmers}">
-            <td th:text="${farmer.fullName}"></td>
-            <td th:text="${farmer.email}"></td>
-            <td th:text="${farmer.role}"></td>
-            <td th:text="${farmer.enabled ? 'Активен' : 'Блокиран'}"
-                th:class="${farmer.enabled ? 'status-active' : 'status-blocked'}"></td>
-            <td>
-                <form th:action="@{/admin/users/toggle-status}" method="post" style="display:inline-block;">
-                    <input type="hidden" name="userId" th:value="${farmer.id}"/>
-                    <button class="btn btn-warning btn-sm"
-                            th:text="${farmer.enabled ? 'Деактивирай' : 'Активирай'}"></button>
-                </form>
 
-                <form th:action="@{/admin/users/delete}" method="post" style="display:inline-block;">
-                    <input type="hidden" name="userId" th:value="${farmer.id}"/>
-                    <button class="btn btn-danger btn-sm"
-                            onclick="return confirm('Сигурни ли сте, че искате да изтриете този потребител?');">Изтрий</button>
-                </form>
-
-                <a th:href="@{/farmers/details/{id}(id=${farmer.id})}" class="btn btn-info btn-sm">Преглед профил</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <h2 class="mt-5">Обикновени потребители</h2>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Име</th>
-            <th>Имейл</th>
-            <th>Роля</th>
-            <th>Статус</th>
-            <th>Действия</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${customers}">
-            <td th:text="${user.fullName}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.role}"></td>
-            <td th:text="${user.enabled ? 'Активен' : 'Блокиран'}"
-                th:class="${user.enabled ? 'status-active' : 'status-blocked'}"></td>
-            <td>
-                <form th:action="@{/admin/users/toggle-status}" method="post" style="display:inline-block;">
-                    <input type="hidden" name="userId" th:value="${user.id}"/>
-                    <button class="btn btn-warning btn-sm"
-                            th:text="${user.enabled ? 'Деактивирай' : 'Активирай'}"></button>
-                </form>
-
-                <form th:action="@{/admin/users/delete}" method="post" style="display:inline-block;">
-                    <input type="hidden" name="userId" th:value="${user.id}"/>
-                    <button class="btn btn-danger btn-sm"
-                            onclick="return confirm('Сигурни ли сте, че искате да изтриете този потребител?');">Изтрий</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
 </div>
 
 </body>

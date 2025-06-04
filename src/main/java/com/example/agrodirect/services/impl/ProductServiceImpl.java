@@ -175,7 +175,8 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
-    private ProductViewDTO mapProductToDTO(Product product){
+    @Override
+    public ProductViewDTO mapProductToDTO(Product product){
 
         List<Review> approvedReviews = reviewRepository.findAllByProductAndApprovedTrue(product);
 
@@ -196,8 +197,12 @@ public class ProductServiceImpl implements ProductService {
         );
 
         dto.setActive(product.getActive());
-        dto.setFarmerName(product.getFarmer().getFirstName() + " " + product.getFarmer().getLastName());
 
+        if (product.getFarmer() != null) {
+            dto.setFarmerName(product.getFarmer().getFirstName() + " " + product.getFarmer().getLastName());
+        } else {
+            dto.setFarmerName("Неизвестен фермер");
+        }
         return dto;
     }
 

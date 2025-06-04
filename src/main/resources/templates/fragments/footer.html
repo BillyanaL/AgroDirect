@@ -1,0 +1,121 @@
+<th:block th:fragment="footer">
+    <!--Site Footer Start-->
+    <footer class="site-footer">
+        <div class="site-footer__top">
+            <div class="container">
+                <div class="site-footer__top-inner">
+                    <div class="site-footer-shape-1 float-bob-x"
+                         style="background-image: url(/images/shapes/site-footer-shape-1.png);"></div>
+                    <div class="row">
+                        <!-- Колона: Лого и описание -->
+                        <div class="col-xl-3 col-lg-6 col-md-6">
+                            <div class="footer-widget__column footer-widget__about">
+                                <div class="footer-widget__logo">
+                                    <a th:href="@{/}"><img src="/images/resources/footer-logo.png" alt="AgroDirect"></a>
+                                </div>
+                                <div class="footer-widget__about-text-box">
+                                    <p class="footer-widget__about-text">
+                                        AgroDirect свързва фермери и клиенти директно – прясна храна, качествени услуги и достъп до автентично земеделие.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Колона: Explore -->
+                        <div class="col-xl-2 col-lg-6 col-md-6">
+                            <div class="footer-widget__column footer-widget__Explore">
+                                <div class="footer-widget__title-box">
+                                    <h3 class="footer-widget__title">Разгледай</h3>
+                                </div>
+                                <ul class="footer-widget__Explore-list list-unstyled">
+                                    <li><a th:href="@{/}">Начало</a></li>
+                                    <li><a th:href="@{/about}">За нас</a></li>
+                                    <li><a th:href="@{/farmers}">Фермери</a></li>
+                                    <li><a th:href="@{/products}">Продукти</a></li>
+                                    <li><a th:href="@{/services}">Услуги</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Колона: Последни статии -->
+                        <div class="col-xl-3 col-lg-6 col-md-6">
+                            <div class="footer-widget__column footer-widget__news">
+                                <div class="footer-widget__title-box">
+                                    <h3 class="footer-widget__title">Последни статии</h3>
+                                </div>
+                                <ul class="footer-widget__news-list list-unstyled">
+                                    <li th:each="article : ${latestArticles}">
+                                        <div class="footer-widget__news-img">
+                                            <img th:src="@{${article.imageUrl}}" alt="">
+                                        </div>
+                                        <div class="footer-widget__news-content">
+                                            <p class="footer-widget__news-date"
+                                               th:text="${#temporals.format(article.createdOn, 'dd MMM yyyy')}"></p>
+                                            <h5 class="footer-widget__news-sub-title">
+                                                <a th:href="@{/farmer/articles/details/{id}(id=${article.id})}"
+                                                   th:text="${article.title}"></a>
+                                            </h5>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Колона: Контакти -->
+                        <div class="col-xl-4 col-lg-6 col-md-6">
+                            <div class="footer-widget__column footer-widget__Contact">
+                                <div class="footer-widget__title-box">
+                                    <h3 class="footer-widget__title">Контакти</h3>
+                                </div>
+                                <ul class="footer-widget__Contact-list list-unstyled">
+                                    <li>
+                                        <div class="icon"><span class="fas fa-phone-square-alt"></span></div>
+                                        <div class="text"><p><a href="tel:+359123456789">+359 123 456 789</a></p></div>
+                                    </li>
+                                    <li>
+                                        <div class="icon"><span class="fas fa-envelope"></span></div>
+                                        <div class="text"><p><a href="mailto:info@agrodirect.bg">info@agrodirect.bg</a></p></div>
+                                    </li>
+                                    <li>
+                                        <div class="icon"><span class="icon-pin"></span></div>
+                                        <div class="text"><p>гр. София, ул. Земеделие 12</p></div>
+                                    </li>
+                                </ul>
+<!--                                <form class="footer-widget__Contact-form">-->
+<!--                                    <div class="footer-widget__Contact-input-box">-->
+<!--                                        <input type="email" placeholder="Имейл адрес" name="email">-->
+<!--                                        <button type="submit" class="footer-widget__Contact-btn"><i class="icon-right-arrow"></i></button>-->
+<!--                                    </div>-->
+<!--                                </form>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Долен футър -->
+        <div class="site-footer__bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="site-footer__bottom-inner">
+                            <p class="site-footer__bottom-text">
+                                © 2025 Дипломна работа <span th:text="${#dates.year(#dates.createNow())}"></span> на <a href="#">Биляна Лилова - AgroDirect</a>
+                            </p>
+<!--                            <div class="site-footer__social">-->
+<!--                                <a href="#"><i class="fab fa-facebook"></i></a>-->
+<!--                                <a href="#"><i class="fab fa-instagram"></i></a>-->
+<!--                                <a href="#"><i class="fab fa-youtube"></i></a>-->
+<!--                            </div>-->
+                            <div class="site-footer__bottom-scroll">
+                                <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="icon-up-arrow"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Site Footer End-->
+</th:block>

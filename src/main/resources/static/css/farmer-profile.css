@@ -10,7 +10,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 .container {
@@ -117,6 +116,10 @@ textarea {
     padding: 12px 20px;
     border-radius: 10px;
     /*box-shadow: 0 0 10px rgba(211, 47, 47, 0.2);*/
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Segoe UI', sans-serif !important;
 }
 
 @media screen and (max-width: 768px) {

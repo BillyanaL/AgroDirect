@@ -1,0 +1,107 @@
+<!-- templates/fragments/main-nav.html -->
+<nav class="main-menu" th:fragment="navigation" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <div class="main-menu__wrapper">
+        <div class="main-menu__wrapper-inner">
+            <div class="main-menu__left">
+                <div class="main-menu__main-menu-box">
+                    <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
+                    <ul class="main-menu__list">
+
+                        <!-- Гост (не влязъл потребител) -->
+                        <li sec:authorize="isAnonymous()"><a th:href="@{/}">Начало</a></li>
+                        <li sec:authorize="isAnonymous()"><a th:href="@{/about}">За нас</a></li>
+                        <li sec:authorize="isAnonymous()"><a th:href="@{/products}">Продукти</a></li>
+                        <li sec:authorize="isAnonymous()"><a th:href="@{/farmers}">Фермери</a></li>
+                        <li sec:authorize="isAnonymous()"><a th:href="@{/articles}">Статии</a></li>
+                        <li sec:authorize="isAnonymous()"><a th:href="@{/services}">Услуги</a></li>
+                        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Вход</a></li>
+                        <li sec:authorize="isAnonymous()"><a th:href="@{/register}">Регистрация</a></li>
+
+                        <!-- Логнат клиент -->
+                        <li sec:authorize="hasRole('USER') and !hasRole('ADMIN')"><a th:href="@{/}">Начало</a></li>
+                        <li sec:authorize="hasRole('USER') and !hasRole('ADMIN')"><a th:href="@{/about}">За нас</a></li>
+                        <li sec:authorize="hasRole('USER') and !hasRole('ADMIN')"><a th:href="@{/products}">Продукти</a></li>
+                        <li sec:authorize="hasRole('USER') and !hasRole('ADMIN')"><a th:href="@{/farmers}">Фермери</a></li>
+                        <li sec:authorize="hasRole('USER') and !hasRole('ADMIN')"><a th:href="@{/farmer/articles/all}">Статии</a></li>
+                        <li sec:authorize="hasRole('USER') and !hasRole('ADMIN')"><a th:href="@{/services}">Услуги</a></li>
+                        <li sec:authorize="hasRole('USER') and !hasRole('ADMIN')"><a th:href="@{/my-orders}">Моите поръчки</a></li>
+                        <li sec:authorize="hasRole('USER') and !hasRole('ADMIN')"><a th:href="@{/logout}">Изход</a></li>
+
+
+<!--                        <ul class="main-menu__list">-->
+                            <!-- Начало -->
+                            <li sec:authorize="hasRole('FARMER')"><a th:href="@{/}">Начало</a></li>
+
+                            <!-- Продукти -->
+                            <li class="dropdown" sec:authorize="hasRole('FARMER')">
+                                <a href="#">Продукти</a>
+                                <ul class="shadow-box">
+                                    <li><a th:href="@{/farmer/products/my}">Моите продукти</a></li>
+                                    <li><a th:href="@{/farmer/products/add}">Добави продукт</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Поръчки -->
+                            <li class="dropdown" sec:authorize="hasRole('FARMER')">
+                                <a href="#">Поръчки</a>
+                                <ul class="shadow-box">
+                                    <li><a th:href="@{/farmer/orders}">Моите поръчки</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Профил -->
+                            <li class="dropdown" sec:authorize="hasRole('FARMER')">
+                                <a href="#">Профил</a>
+                                <ul class="shadow-box">
+                                    <li><a th:href="@{/farmer/profile}">Моят профил</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Услуги -->
+                            <li class="dropdown" sec:authorize="hasRole('FARMER')">
+                                <a href="#">Услуги</a>
+                                <ul class="shadow-box">
+                                    <li><a th:href="@{/farmer/services/my}">Моите услуги</a></li>
+                                    <li><a th:href="@{/farmer/service/add}">Добави услуга</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Статии -->
+                            <li class="dropdown" sec:authorize="hasRole('FARMER')">
+                                <a href="#">Статии</a>
+                                <ul class="shadow-box">
+                                    <li><a th:href="@{/farmer/articles/my}">Моите статии</a></li>
+                                    <li><a th:href="@{/farmer/article/add}">Добави статия</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Изход -->
+                            <li sec:authorize="hasRole('FARMER')"><a th:href="@{/logout}">Изход</a></li>
+<!--                        </ul>-->
+
+
+                        <!-- Администратор -->
+                        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/products}">Продукти</a></li>
+                        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/orders}">Поръчки</a></li>
+                        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/users}">Потребители</a></li>
+                        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/services/pending}">Услуги</a></li>
+                        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/articles}">Статии</a></li>
+                        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/reviews/pending}">Коментари</a></li>
+                        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/logout}">Изход</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-menu__right">
+                <div class="main-menu__search-cart-btn-box">
+<!--                    <div class="main-menu__search-box">-->
+<!--                        <a href="#" class="main-menu__search search-toggler icon-magnifying-glass"></a>-->
+<!--                    </div>-->
+                    <div class="main-menu__cart-box" sec:authorize="hasRole('USER')">
+                        <a th:href="@{/cart}" class="main-menu__cart icon-shopping-cart"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
